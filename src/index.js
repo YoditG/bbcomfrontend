@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Blog from './Blog';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
+  <BrowserRouter>
   <React.StrictMode>
     <Blog />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
