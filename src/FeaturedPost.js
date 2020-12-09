@@ -106,30 +106,10 @@ export default function FeaturedPost(props) {
   
 
   const handleLikes=(e)=>{
-    // if(post.swish_users.includes(user.userdata._id)){
-    //   post.swish_users = post.swish_users.filter(el=>el!==user.userdata._id)
-    //   post.swishes -=1
-    //   user.posts[index].swishes = post.swishes
-    //   user.posts[index].swish_users = post.swish_users
-    //   setUser(user)
-    //   setSwish([post.swishes,post.swish_users])
-    // }else{
-    //   post.swish_users = post.swish_users.push(user.userdata._id)
-    //   post.swishes+=1
-    //   user.posts[index].swishes = post.swishes
-    //   user.posts[index].swish_users = post.swish_users
-    //   setUser(user)
-    //   setSwish([post.swishes,post.swish_users])
-    // }
-    
-    
-
     const config = {
       method: 'put',
       url: `http://localhost:3000/users/${user.userdata._id}/posts/${post._id}/likes`,
-      // data: { 'post_id' : `${post._id}`,
-      //         'swishes': `${post.swishes}`,
-      //         'swish_users': `${post.swish_users}` }
+
       }
       
       axios(config).then(res=> {
@@ -146,27 +126,23 @@ export default function FeaturedPost(props) {
         url: `http://localhost:3000/users/${post._id}/addcomment`,
         data: { 'poster_id':  `${user.userdata._id}`,
                 'commentText': `${newCommentText}`,
+                'post_id':  `${user.posts[index]._id}`
                 }
       }
 //... and get the populated comments....
       axios(config).then(res=>{ 
-        const addComment = res.data
+        console.log(res.data)
+        const addComment = res.data.pop_comment
         user.posts[index].comments.push(addComment)
         setUser(user)
-         setComments([...comments,addComment])
-//... and associate the comments to the corresponding post
-        const commentToPost = {
-          method: 'put',
-          url: `http://localhost:3000/users/${post._id}/addcomment`,
-          data: {'comment_id': `${addComment._id}`}
-        }
-        axios(commentToPost)
+       setComments([...comments,addComment])
       })
       
     }
   }
 
-  const handleDelComment= async (comment_id,poster_id,post_user,deleter_id)=>{
+  const handleDelComment =  (comment_id,poster_id,post_user,deleter_id)=>{
+    setComments(comments.filter(el=>el._id!==comment_id))
     const config = {
       method: 'delete',
       url: `http://localhost:3000/users/${post._id}/deletecomment`,
@@ -179,7 +155,11 @@ export default function FeaturedPost(props) {
 
     }
 
-    await axios(config)
+     axios(config).then(res=>{
+      //setComments(res.data.updatedPosts.comments)
+       console.log(res.data.updatedPosts)
+       console.log(res.data.updatedComments)
+      })
   }
 
   return (
