@@ -120,24 +120,25 @@ export default function FeaturedPost(props) {
   const handleEnter=(e)=>{
     if(e.keyCode ===13 ){
       //on keypress enter add and populate comment....
-      e.target.value="";
+      //setNewCommentText(e.target.value)
+      
       const config = {
         method: 'post',
         url: `http://localhost:3000/users/${post._id}/addcomment`,
         data: { 'poster_id':  `${user.userdata._id}`,
-                'commentText': `${newCommentText}`,
+                'commentText': `${e.target.value}`,
                 'post_id':  `${user.posts[index]._id}`
                 }
       }
 //... and get the populated comments....
       axios(config).then(res=>{ 
         console.log(res.data)
-        const addComment = res.data.pop_comment
-        user.posts[index].comments.push(addComment)
-        setUser(user)
+         const addComment = res.data.pop_comment
+        //  user.posts[index].comments.push(addComment)
+        // setUser(user)
        setComments([...comments,addComment])
       })
-      
+      e.target.value=""; 
     }
   }
 
@@ -277,7 +278,7 @@ export default function FeaturedPost(props) {
                                   {user.userdata.username.toUpperCase()}
                                   </Grid>
                                   <Grid item>
-                                    <input type="text" placeholder="comment..."  style={{width: '100%', height:'40px'}} onChange={(e)=>setNewCommentText(e.target.value)} onKeyDown={(e)=>handleEnter(e)}/>
+                                    <input type="text" placeholder="comment..."  style={{width: '100%', height:'40px'}}  onKeyDown={(e)=>handleEnter(e)}/>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -302,3 +303,5 @@ export default function FeaturedPost(props) {
 FeaturedPost.propTypes = {
   post: PropTypes.object,
 };
+
+//onChange={(e)=>setNewCommentText(e.target.value)}
