@@ -1,6 +1,12 @@
 .App {
   text-align: center;
+ 
 }
+
+.Blog__overlay{
+  background: rgba(255, 255, 255, 0.5);
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -34,5 +40,31 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.MuiCardContent-root:last-child {
+  padding-right : 0 !important;
+  padding-left : 0 !important;
+}
+
+@media (orientation: landscape) {
+  #profilePic img{
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    
+  }
+}
+
+@media (orientation: portrait) {
+  #profilePic img{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
   }
 }
