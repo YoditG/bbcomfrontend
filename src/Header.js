@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import {Link,Grid} from '@material-ui/core';
-import landingPageIcon from './assets/img/logo_ballin_small.svg'
+import landingPageIcon from './assets/img/logo_ballin_small_orange.png'
 import UserContext from './contexts/UserContext'
 import logo from './assets/img/landingPageIcon.svg'
 
@@ -40,7 +40,7 @@ export default function Header(props) {
   const sections = [
     {sec: user.userdata.username, url: '#'  },
     {sec: 'messenger', url: '#' },
-    {sec: 'log out', url: '#' }
+    {sec: 'log out', url: '/' }
   ]
 
   

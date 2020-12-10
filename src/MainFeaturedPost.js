@@ -149,11 +149,11 @@ export default function MainFeaturedPost(props) {
           </div>
         </Grid>
         <Grid item container md={4} direction="column" justify="center" align="end" >
-          <Grid item  >
+          {/* <Grid item  >
             <Link variant="subtitle1" href="#" underline='none'>
               <Button className={classes.button}>more info</Button>
             </Link>
-          </Grid>
+          </Grid> */}
           <Link variant="subtitle1" href="#" underline='none'>
             <Grid>
               <Button className={classes.button}>friend request</Button>

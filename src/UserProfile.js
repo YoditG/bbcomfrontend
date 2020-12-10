@@ -62,13 +62,13 @@ const UserProfile = () => {
                         <SideCard title="GROUPS"/>
                         </Grid>
                         <Grid item>
-                        <Footer title="Footer" description="Something here to give the footer a purpose!" />
+                        <Footer title="Footer" description="Privacy  · Impressum/AGB/NetzDG  · Commercial  · Data Protection   · Cookies  ·   · BBcom © 2020" />
                         </Grid>
                     </Grid>
                 </Grid>
 
                 <Grid item xs={6}>
-                    <Grid container direction="column" spacing={2} align="center" >
+                    <Grid container direction="column" spacing={2} align="center">
                         {posts&&  posts.map((post,index) => (
                             <Grid item xs={12}>
                                 <FeaturedPost key={index} post={post} index={index} />

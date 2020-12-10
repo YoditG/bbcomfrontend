@@ -13,6 +13,7 @@ import axios from 'axios'
 import './App.css'
 import { Button } from '@material-ui/core';
 import logo from './assets/img/logo_ballin_small.svg'
+import logo_orange from './assets/img/logo_ballin_small_orange.svg'
 import UserContext from './contexts/UserContext'
 import deleteIcon from './assets/img/deleteIcon.png'
 
@@ -165,7 +166,7 @@ export default function FeaturedPost(props) {
 
   return (
     <>
-      <Grid item xs={12} style={{paddingBottom: '50px'}}>
+      <Grid item xs={12} style={{paddingBottom: '100px'}}>
 
         <Card m={-1} className={classes.card}>
           <div className={classes.cardDetails}>

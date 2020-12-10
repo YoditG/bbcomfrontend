@@ -7,8 +7,11 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { ThemeProvider,createMuiTheme} from '@material-ui/core';
+import { login, logout } from "./utils/auth"
 import Header from './Header';
 import axios from 'axios'
+import Login from './Login'
+import HomePage from './HomePage'
 //import MainFeaturedPost from './MainFeaturedPost';
 //import FeaturedPost from './FeaturedPost';
 //import Main from './Main';
@@ -18,11 +21,21 @@ import background from './assets/img/bbcom_background.svg'
 import UserProfile from './UserProfile';
 import UserContext from './contexts/UserContext'
 import logo from './assets/img/logo_ballin_small.svg'
+import ProtectedRoute from "./ProtectedRoute"
+import {
+  Switch,
+  Route,
+  useHistory,
+  Redirect
+} from "react-router-dom";
+
+require('dotenv').config()
 // import post1 from './blog-post.1.md';
 // import post2 from './blog-post.2.md';
 // import post3 from './blog-post.3.md';
 
 const { userData, ballerData } = require('./assets/data/userData') 
+
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -90,14 +103,34 @@ const sidebar = {
   ],
 };
 
+
+
 export default function Blog() {
   
   const classes = useStyles();
   const [user, setUser] = useState(null)
+  const [credentials, setCredentials] = useState(null)
   // const [baller,setBaller] = useState(null)
   // const [posts,setPosts] = useState(null)
   // const [team,setTeam] = useState(null)
+  const history = useHistory()
 
+  const handleSetCredentials = (e) => {
+    setCredentials(prevCredentials => ({
+      ...prevCredentials,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const handleLogin = async () => {
+    await login(credentials)
+    history.push('/admin')
+  }
+
+  const handleLogout = () => {
+    logout()
+    history.push('/login')
+  }
   
   useEffect(()=>{
     axios.get('http://localhost:3000/users/5fc76652191ef665161ad0b8/profile').then(res=>{
@@ -119,11 +152,25 @@ export default function Blog() {
     <ThemeProvider theme={completeTheme}>
       <CssBaseline />
       <Container maxWidth="lg"  >
-       <Header/>
+      
         <main >
           
-          <UserProfile/>
-
+          <Switch>
+            <Route path="/login">
+              <Login  />
+            </Route>
+          {/* <ProtectedRoute path= '/user' onLogout={handleLogout}> */}
+          <Route path="/user">
+            <Header/>
+            <UserProfile/>
+            </Route>
+          {/* </ProtectedRoute> */}
+          <Route path="/">
+            <HomePage/>
+          </Route>
+          </Switch>
+          {/* <UserProfile/>
+          */}
         </main>
       </Container>
       
