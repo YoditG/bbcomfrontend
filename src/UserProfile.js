@@ -67,10 +67,10 @@ const UserProfile = () => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={6} >
                     <Grid container direction="column" spacing={2} align="center">
                         {posts&&  posts.map((post,index) => (
-                            <Grid item xs={12}>
+                            <Grid item xs={12} >
                                 <FeaturedPost key={index} post={post} index={index} />
                             </Grid>
                         ))}
