@@ -165,8 +165,8 @@ export default function FeaturedPost(props) {
   }
 
   return (
-    <>
-      <Grid item xs={12} style={{paddingBottom: '100px'}}>
+  
+      <Grid item xs={12} style={{paddingBottom: '80px'}}>
 
         <Card m={-1} className={classes.card}>
           <div className={classes.cardDetails}>
@@ -297,7 +297,7 @@ export default function FeaturedPost(props) {
         </Card>
 
       </Grid>
-    </>
+  
   );
 }
 

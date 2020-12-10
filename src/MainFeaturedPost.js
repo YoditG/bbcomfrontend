@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import profilePic from './assets/img/goran.jpg'
+import profilePic from './assets/img/profile_pic.jpg'
 import {Button} from '@material-ui/core';
 import { FormatBold } from '@material-ui/icons';
 import UserContext from './contexts/UserContext'
