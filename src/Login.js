@@ -5,7 +5,7 @@ import logo from './assets/img/bbcom_orange_logo_title.png'
 import Footer from './Footer'
 import {Link} from 'react-router-dom'
 
-const Login = () =>{
+const Login = ({onLogin, onSetCredentials}) =>{
 
     const useStyles = makeStyles({
         form:{
@@ -42,11 +42,11 @@ const Login = () =>{
             <div className={classes.form} >
        
             <label for="username"> Username </label> <br/><br/>
-            <input name="username" type="text" placeholder="username" style={{width: '500px',height: '50px',fontSize: 'larger'}}/> <br/><br/>
+            <input name="username" type="text" placeholder="username" style={{width: '500px',height: '50px',fontSize: 'larger'}} onChange={e => onSetCredentials(e)}/> <br/><br/>
             <label for="password"> Password </label> <br/><br/>
-            <input name="password" type="password" placeholder="password" style={{width: '500px',height: '50px',fontSize: 'larger'}} /> <br/><br/>
+            <input name="password" type="password" placeholder="password" style={{width: '500px',height: '50px',fontSize: 'larger'}} onChange={e => onSetCredentials(e)}/> <br/><br/>
 
-            <Link to="/user" style={{textDecoration:"none"}}><Button className={classes.button}>Login</Button></Link>
+            <Link to="/user" style={{textDecoration:"none"}}><Button className={classes.button} onClick={() => onLogin()}>Login</Button></Link>
             </div>
         </div>
         </Grid>

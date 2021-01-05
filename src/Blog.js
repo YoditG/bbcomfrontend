@@ -8,7 +8,8 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { ThemeProvider,createMuiTheme} from '@material-ui/core';
 import { login, logout } from "./utils/auth"
-import Header from './Header';
+import Header from './Header'
+
 import axios from 'axios'
 import Login from './Login'
 import HomePage from './HomePage'
@@ -16,10 +17,14 @@ import HomePage from './HomePage'
 //import FeaturedPost from './FeaturedPost';
 //import Main from './Main';
 //import Sidebar from './Sidebar';
+import Cookies from "js-cookie";
 
 import background from './assets/img/bbcom_background.svg'
 import UserProfile from './UserProfile';
+import UserDataContext from './contexts/UserDataContext'
 import UserContext from './contexts/UserContext'
+import TeamContext from './contexts/TeamContext'
+import BallerContext from './contexts/BallerContext'
 import logo from './assets/img/logo_ballin_small.svg'
 import ProtectedRoute from "./ProtectedRoute"
 import {
@@ -28,6 +33,7 @@ import {
   useHistory,
   Redirect
 } from "react-router-dom";
+const {setAuthHeaders} =  require('./utils/auth')
 
 require('dotenv').config()
 // import post1 from './blog-post.1.md';
@@ -43,38 +49,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const completeTheme = createMuiTheme({
-    palette: {
-      background: {
-        backgroundImage: `url(${logo})`,
+// const completeTheme = createMuiTheme({
+//     // palette: {
+//     //   background: {
+//     //     backgroundImage: `url(${logo})`,
        
-      },
-    },
-    overrides: {
-      MuiCssBaseline: {
-        "@global": {
-          body: {
-              //backgroundImage: `url(${logo})`,
-              // opacity: 0.1,
-              backgroundColor: 'rgb(255,255,255)',
+//     //   },
+//     // },
+//     overrides: {
+//       MuiCssBaseline: {
+//         "@global": {
+//           body: {
+//               //backgroundImage: `url(${logo})`,
+//               // opacity: 0.1,
+//               //backgroundColor: 'rgb(255,255,255)',
               
-              color: 'white',
+//               color: 'white',
               
              
-          },
+//           },
           
-        }
-      }
-    },
-    // overlay: {
-    //   position: 'absolute',
-    //   top: 0,
-    //   bottom: 0,
-    //   right: 0,
-    //   left: 0,
-    //   backgroundColor: 'rgb(0,0,0,.8)',
-    // },
-  });
+//         }
+//       }
+//     },
+//     // overlay: {
+//     //   position: 'absolute',
+//     //   top: 0,
+//     //   bottom: 0,
+//     //   right: 0,
+//     //   left: 0,
+//     //   backgroundColor: 'rgb(0,0,0,.8)',
+//     // },
+//   });
   
 
 //const posts = [post1, post2, post3];
@@ -108,11 +114,16 @@ const sidebar = {
 export default function Blog() {
   
   const classes = useStyles();
-  const [user, setUser] = useState(null)
+  const [userData, setUserData] = useState(null)
+  
   const [credentials, setCredentials] = useState(null)
-  // const [baller,setBaller] = useState(null)
+
+  const [user, setUser] = useState(null)
+  const [baller,setBaller] = useState(null)
   // const [posts,setPosts] = useState(null)
-  // const [team,setTeam] = useState(null)
+  const [team,setTeam] = useState(null)
+
+  const [loggedIn, setLoggedIn] = useState(false)
   const history = useHistory()
 
   const handleSetCredentials = (e) => {
@@ -121,62 +132,86 @@ export default function Blog() {
       [e.target.name]: e.target.value
     }))
   }
-
+  
   const handleLogin = async () => {
-    await login(credentials)
-    history.push('/admin')
+    const data = await login(credentials)
+    console.log(data)
+    setUser(data.data.user)
+    // const {user,setUser} = useContext(UserContext)
+      // console.log('this is the user:',data.data.user)
+    // setUser(data.data.user)
+    // if(data.data.baller){
+    //   setBaller(data.data.baller)
+    //   if(data.data.team){
+    //     setTeam(data.data.team)
+    //   }
+    // }
+    setLoggedIn(true)
+    history.push('/user')
+    
   }
 
   const handleLogout = () => {
     logout()
     history.push('/login')
   }
+
+const APP_NAME = 'bbcom'
+const token = Cookies.get(`${APP_NAME}-auth-token`);
+//console.log(token)
+if(token){
+  const userID = window.localStorage.getItem('bbcom-userID')
+  const loadUser = async ()=>{
+    //setAuthHeaders()
+    axios.defaults.headers.common["Access-Control-Allow-Origin"] = 'http://www.localhost:3001';
+    axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization'
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    axios.defaults.headers.common["Access-Control-Allow-Methods"] =  "GET, POST, PUT, DELETE"
+    const reload = await axios.get(`http://localhost:3000/users/${userID}/userData`)
+    //console.log(userID)
+  }
+  loadUser()
   
-  useEffect(()=>{
-    axios.get('http://localhost:3000/users/5fc76652191ef665161ad0b8/profile').then(res=>{
-      console.log(res.data.team.age_group)
-      const baller= res.data.baller;
-      const userdata=res.data.user;
-      const team = res.data.team;
-      const posts = res.data.posts;
-      const us={userdata,baller,team,posts}
-      console.log(us)
-      setUser(us)
-    })
-  },[])
+}
+ 
+  
 
   return (
     <>
-    {user &&<UserContext.Provider value={{user,setUser}}>
-    <React.Fragment  >
-    <ThemeProvider theme={completeTheme}>
-      <CssBaseline />
-      <Container maxWidth="lg"  >
-      
-        <main >
-          
-          <Switch>
-            <Route path="/login">
-              <Login  />
-            </Route>
-          {/* <ProtectedRoute path= '/user' onLogout={handleLogout}> */}
-          <Route path="/user">
-            <Header/>
-            <UserProfile/>
-            </Route>
-          {/* </ProtectedRoute> */}
-          <Route path="/">
-            <HomePage/>
-          </Route>
-          </Switch>
-          {/* <UserProfile/>
-          */}
-        </main>
-      </Container>
-      
-      </ThemeProvider>
-    </React.Fragment>
-    </UserContext.Provider>}
+       {/* <UserDataContext.Provider value={{ userData, setUserData }}> */}
+        <React.Fragment  >
+          {/* <ThemeProvider theme={completeTheme}> */}
+            <CssBaseline />
+            <Container maxWidth="lg"  >
+
+              <main >
+
+                <Switch>
+                  <Route path="/login" >
+                    <Login onLogin={handleLogin} onSetCredentials={handleSetCredentials} />
+                  </Route>
+                  {loggedIn&&<TeamContext.Provider value={{ team, setTeam }}>
+                    <BallerContext.Provider value={{ baller, setBaller }}>
+                      <UserContext.Provider value={{ user, setUser }}>
+                        <ProtectedRoute path='/user' onLogout={handleLogout} >
+                        <Header/>
+                        <UserProfile/>
+                        </ProtectedRoute>
+                      </UserContext.Provider>
+                    </BallerContext.Provider>
+                  </TeamContext.Provider>}
+                  <Route path="/" exact>
+                    <HomePage />
+                  </Route>
+                </Switch>
+              </main>
+            </Container>
+
+          {/* </ThemeProvider> */}
+        </React.Fragment>
+      {/* </UserDataContext.Provider>} */}
     </>
   );
 }
+
+

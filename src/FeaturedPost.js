@@ -13,8 +13,11 @@ import axios from 'axios'
 import './App.css'
 import { Button } from '@material-ui/core';
 import logo from './assets/img/logo_ballin_small.svg'
-import logo_orange from './assets/img/logo_ballin_small_orange.svg'
+//import logo_orange from './assets/img/logo_ballin_small_orange.svg'
+
 import UserContext from './contexts/UserContext'
+import BallerContext from './contexts/BallerContext'
+import TeamContext from './contexts/TeamContext'
 import deleteIcon from './assets/img/deleteIcon.png'
 
 const useStyles = makeStyles({
@@ -89,13 +92,16 @@ export default function FeaturedPost(props) {
 
   const [Post,setPost] =useState(post)
 
-  const { index } = props;
+  //const { index } = props;
 
+  // const {userData,setUserData} = useContext(UserDataContext)
   const {user,setUser} = useContext(UserContext)
-  const posts = user.posts
+  const {baller,setBaller} = useContext(BallerContext)
+  const {team,setTeam} = useContext(TeamContext)
+  // const posts = userData.posts
 
-  const [comments,setComments]= useState(user.posts[index].comments);
-  const [swish,setSwish] = useState([user.posts[index].swishes,posts[index].swish_users])
+  const [comments,setComments]= useState(post.comments);
+  const [swish,setSwish] = useState([post.swishes,post.swish_users])
   const [commentBar,setCommentBar] = useState(false)
   const [newCommentText,setNewCommentText] = useState("")
 
@@ -109,7 +115,7 @@ export default function FeaturedPost(props) {
   const handleLikes=(e)=>{
     const config = {
       method: 'put',
-      url: `http://localhost:3000/users/${user.userdata._id}/posts/${post._id}/likes`,
+      url: `http://localhost:3000/users/${user._id}/posts/${post._id}/likes`,
 
       }
       
@@ -126,25 +132,25 @@ export default function FeaturedPost(props) {
       const config = {
         method: 'post',
         url: `http://localhost:3000/users/${post._id}/addcomment`,
-        data: { 'poster_id':  `${user.userdata._id}`,
+        data: { 'poster_id':  `${user._id}`,
                 'commentText': `${e.target.value}`,
-                'post_id':  `${user.posts[index]._id}`
+                'post_id':  `${post._id}`
                 }
       }
 //... and get the populated comments....
       axios(config).then(res=>{ 
         console.log(res.data)
-         const addComment = res.data.pop_comment
-        //  user.posts[index].comments.push(addComment)
-        // setUser(user)
-       setComments([...comments,addComment])
+        const addComment = res.data.pop_comment
+        setComments([...comments,addComment])
       })
       e.target.value=""; 
     }
   }
 
   const handleDelComment =  (comment_id,poster_id,post_user,deleter_id)=>{
+    if (deleter_id === post_user || deleter_id === poster_id) {
     setComments(comments.filter(el=>el._id!==comment_id))
+    }
     const config = {
       method: 'delete',
       url: `http://localhost:3000/users/${post._id}/deletecomment`,
@@ -157,16 +163,16 @@ export default function FeaturedPost(props) {
 
     }
 
-     axios(config).then(res=>{
+      axios(config).then(res=>{
       //setComments(res.data.updatedPosts.comments)
-       console.log(res.data.updatedPosts)
-       console.log(res.data.updatedComments)
+      console.log(res.data.updatedPosts)
+      console.log(res.data.updatedComments)
       })
   }
 
   return (
   
-      <Grid item xs={12} style={{paddingBottom: '80px'}}>
+      <Grid item xs={12} style={{paddingBottom: '10px'}}>
 
         <Card m={-1} className={classes.card}>
           <div className={classes.cardDetails}>
@@ -254,7 +260,7 @@ export default function FeaturedPost(props) {
                                 {handleDate(comment.date)}
                                 </Grid>
                                 <Grid item >
-                                <Button onClick={(e)=>handleDelComment(comment._id,comment.user_id._id,post.poster_id._id,user.userdata._id)}><img alt="deleteIcon" src={deleteIcon} style={{width:'25%'}}/></Button>
+                                <Button onClick={(e)=>handleDelComment(comment._id,comment.user_id._id,post.poster_id._id,user._id)}><img alt="deleteIcon" src={deleteIcon} style={{width:'25%'}}/></Button>
                                 </Grid>
                                 </Grid>
                               </Grid>
@@ -266,17 +272,17 @@ export default function FeaturedPost(props) {
                     </Grid>
                   </Grid>}
 
-                   <Grid item>
+                  <Grid item>
                             <Grid container direction="row" justify="space-around" style={{borderTop: '1px solid white',paddingTop: '20px'}} alignItems="center">
 
                               <Grid  item>
-                                <img alt="profilePic" src={`http://localhost:3000/${user.userdata.profilePic}`} className={classes.profilePic} />
+                                <img alt="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic} />
                               </Grid>
 
                               <Grid xs={10}item>
                                 <Grid container direction="column" align="start">
                                   <Grid item>
-                                  {user.userdata.username.toUpperCase()}
+                                  {user.username.toUpperCase()}
                                   </Grid>
                                   <Grid item>
                                     <input type="text" placeholder="comment..."  style={{width: '100%', height:'40px'}}  onKeyDown={(e)=>handleEnter(e)}/>

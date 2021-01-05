@@ -8,14 +8,22 @@ import Link from '@material-ui/core/Link';
 import profilePic from './assets/img/profile_pic.jpg'
 import {Button} from '@material-ui/core';
 import { FormatBold } from '@material-ui/icons';
-import UserContext from './contexts/UserContext'
+import UserDataContext from './contexts/UserDataContext'
 import background from './assets/img/bbcom_background.svg'
 import './App.css'
 
+import UserContext from './contexts/UserContext'
+import BallerContext from './contexts/BallerContext'
+import TeamContext from './contexts/TeamContext' 
+
 export default function MainFeaturedPost(props) {
+
+  const {user,setUser} = useContext(UserContext)
+  const {baller,setBaller} = useContext(BallerContext)
+  const {team,setTeam} = useContext(TeamContext)
   
   //const { post } = props;
-  const {user,setUser} = useContext(UserContext)
+  //const {userData,setUserData} = useContext(UserDataContext)
   const posts = user.post;
  
 
@@ -99,50 +107,50 @@ export default function MainFeaturedPost(props) {
         <Grid item className={classes.profilePicGrid}>
           {/* <div className={classes.profilePic} id={profilePic} >
           </div> */}
-          <img id="profilePic" src={profilePic} className={classes.profilePic}/>
+          <img id="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
         </Grid>
         <Grid item md={5}>
            <div className={classes.mainFeaturedPostContent} paragraph>
           <Typography variant="h4" color="inherit" style={{marginBottom: '10px'}}>
-            WELCOME, {user.userdata.username.toUpperCase()}! 
+            WELCOME, {user.username.toUpperCase()}! 
             </Typography>
             <div  className={classes.profileInfoBody}>
-            {user.userdata.role &&
+            {user.role &&
             <Grid container direction="row" >
             <Grid item>
-             {user.userdata.role[0]&& user.userdata.role[0].toUpperCase()}
+             {user.role[0]&& user.role[0].toUpperCase()}
              </Grid> 
-             {user.userdata.role[1]&& <Grid item>
-              {", "+user.userdata.role[1].toUpperCase()}
+             {user.role[1]&& <Grid item>
+              {", "+user.role[1].toUpperCase()}
             </Grid>}
-            {user.userdata.role[2]&& <Grid item>
-              {", "+user.userdata.role[2].toUpperCase()}
+            {user.role[2]&& <Grid item>
+              {", "+user.role[2].toUpperCase()}
             </Grid>}
             </Grid>}
-            {user.team &&
+            {team &&
             <Grid container direction="row"  >
-            {user.team.club &&
+            {team.club &&
                <Grid item>
-               CLUB: {user.team.club+", "}
+               CLUB: {team.club+", "}
                </Grid>
                } 
-               {user.team.age_group[0]&&
+               {team.age_group[0]&&
              <Grid item>
-              {user.team.age_group[0]}
+              {team.age_group[0]}
               </Grid>}
-              {user.team.age_group[1] &&
+              {team.age_group[1] &&
               <Grid item>
-              {user.team.age_group[1]}
+              {team.age_group[1]}
               </Grid>}
-              {user.team.age_group[2] &&
+              {team.age_group[2] &&
               <Grid item>
-              {user.team.age_group[2]}
+              {team.age_group[2]}
               </Grid>}
             </Grid>}
-            {user.userdata.bio &&
+            {user.bio &&
               <Grid container direction="row" >
               <Grid item>
-                BIO: {user.userdata.bio} 
+                BIO: {user.bio} 
             </Grid>
             </Grid>}
             </div>

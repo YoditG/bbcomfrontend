@@ -17,12 +17,12 @@ const HomePage = () =>{
     const classes = useStyles()
 
     return(
-        <Grid container direction="column"  justify="center" align="center" style={{paddingTop: '5%'}}>
+        <Grid container direction="column"  justify="center" align="center" style={{paddingTop: '5%'}} spacing={3}>
         <Grid item>
-        <img src={logo} alt="logo"/>
+        <img src={logo} alt="logo" style={{width: '30%'}}/>
         </Grid>
         <Grid item>
-            <Grid container direction="row" justify="center" align="center" style={{paddingTop: '5%'}} spacing={10}>
+            <Grid container direction="row" justify="center" align="center" style={{paddingTop: '15%'}} spacing={10}>
                 <Grid item>
                 <Link to="/login" style={{textDecoration:"none"}}><Button className={classes.button}> Login</Button></Link>
                 </Grid>

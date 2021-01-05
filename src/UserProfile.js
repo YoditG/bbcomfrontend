@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
 import Sidebar from './Sidebar';
@@ -12,24 +12,46 @@ import profilePic from './assets/img/tiger.png'
 import SideCard from './SideCard'
 import FriendsCard from './FriendsCard.js'
 import Footer from './Footer';
+//import UserDataContext from './contexts/UserDataContext'
 import UserContext from './contexts/UserContext'
+import BallerContext from './contexts/BallerContext'
+import TeamContext from './contexts/TeamContext'
+
 import logo from "./assets/img/logo_ballin_small.svg"
+import Header from './Header';
+import { userContext } from './utils/auth';
+import axios from 'axios';
 
 
 
 const UserProfile = () => {
+    //const {userData,setUserData} = useContext(UserDataContext)
     const {user,setUser} = useContext(UserContext)
-    const posts = user.posts
+    const {baller,setBaller} = useContext(BallerContext)
+    const {team,setTeam} = useContext(TeamContext)
+    
+    const [posts,setPosts] = useState([])
+    //const posts = user.posts
+
+    useEffect(()=>{
+        const getPosts = async ()=>{
+            const usersPosts = await axios.get(`http://localhost:3000/users/${user._id}/profile`,{withCredentials: true})
+            console.log(usersPosts)
+            setPosts(usersPosts.data)
+        }
+
+        getPosts()
+    },[])
+
+    
     
     
 
     const useStyles = makeStyles({
-          
-         
-          cardMedia: {
+        cardMedia: {
             width: 160,
-          },
-          profilePic:{
+        },
+        profilePic:{
             display: 'inline-block',
             width: '90%',
             height: '90%',
@@ -43,13 +65,13 @@ const UserProfile = () => {
             //  transform: 'translateY(-50%)',
           // transform: translateY(-50%);
             //border: 'solid 1px black',
-           
-          },
+        },
     })
     const classes = useStyles()
 
     return (
         <>
+             
             {user&& <MainFeaturedPost />}
             <Grid container direction="row" spacing={2} justify="center" >
 

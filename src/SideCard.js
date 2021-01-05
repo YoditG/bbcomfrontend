@@ -45,9 +45,9 @@ const SideCard = (props)=>{
                         </Typography>
 
                         <Typography variant="subtitle1" color="textSecondary">
-                            <Link href="#" underline="none" className={classes.linkStyles}  >one event</Link> <br />
-                            <Link href="#" underline="none" className={classes.linkStyles} >another event</Link> <br />
-                            <Link href="#" underline="none" className={classes.linkStyles} >wow I am so busy...</Link>
+                            <Link href="#" underline="none" className={classes.linkStyles}  >The Basketball Tour..., 12/16/2020</Link> <br />
+                            <Link href="#" underline="none" className={classes.linkStyles} >TSV Berghausen vs TB..., 01/10/2021</Link> <br />
+                            {/* <Link href="#" underline="none" className={classes.linkStyles} >wow I am so busy...</Link> */}
                         </Typography>
 
                         <Typography variant="subtitle1" color="primary" >

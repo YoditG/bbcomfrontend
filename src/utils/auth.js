@@ -1,6 +1,8 @@
+import {React, useContext} from 'react'
 import axios from "axios";
 import Cookies from "js-cookie";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import UserContext from '../contexts/UserContext'
 
 const APP_NAME = 'bbcom'
 
@@ -12,13 +14,17 @@ if (process.env.NODE_ENV === "development") {
 
 const setAuthHeaders = () => {
   const token = Cookies.get(`${APP_NAME}-auth-token`);
+  //console.log(token)
   if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
+
+  //console.log('this is the token in setauthheaders:',axios.defaults.headers.common["Authorization"])
 }
 
 const decodeToken = () => {
     const token = Cookies.get(`${APP_NAME}-auth-token`);
+    console.log('token:',token)
     let decodedToken
     try {
       if (token) {
@@ -35,26 +41,37 @@ const decodeToken = () => {
         decodedToken = jwt.decode(token)
       }
     } catch (error) {
-      console.log(error.message)
+      console.log('erroooooooooooooor:',error.message)
     }
     return decodedToken
   }
-    
+
 const login = async (credentials) => {
+  
     const { username, password } = credentials
+    let data
     try {
-      const data = await axios.post('/auth/login', {
+        data = await axios.post('http://localhost:3000/auth/login', {
         username,
         password
       })
+      
+
+      
       const token = data.headers['x-authorization-token'];
+      
+
+
       if (token) {
           Cookies.set(`${APP_NAME}-auth-token`, token);
+          window.localStorage.setItem('bbcom-userID',`${data.data.user._id}`)
           setAuthHeaders()
+          
       }
     } catch (e) {
       console.log(e.message)
     }
+    return data
   }
 
   const logout = () => {
@@ -79,5 +96,5 @@ export {
     login,
     logout,
     userContext,
-    decodeToken
- }
+    decodeToken,
+}

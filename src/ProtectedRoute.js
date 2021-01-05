@@ -1,5 +1,5 @@
 import React from "react"
-import { decodeToken } from './utils/auth'
+import { decodeToken,setAuthHeaders } from './utils/auth'
 
 import {
     Route,

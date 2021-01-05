@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,8 +8,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import {Link,Grid} from '@material-ui/core';
 import landingPageIcon from './assets/img/logo_ballin_small_orange.png'
+//import UserDataContext from './contexts/UserDataContext'
 import UserContext from './contexts/UserContext'
 import logo from './assets/img/landingPageIcon.svg'
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -37,12 +39,18 @@ export default function Header(props) {
   const classes = useStyles();
   //const { sections, title } = props;
   const {user,setUser} = useContext(UserContext)
+  console.log(user)
   const sections = [
-    {sec: user.userdata.username, url: '#'  },
+    {sec: user.username, url: '#'  },
     {sec: 'messenger', url: '#' },
     {sec: 'log out', url: '/' }
   ]
 
+  // useEffect(()=>{
+  //   const getUser = async ()=>{
+  //     await axios.get(`http://localhost:3000/users/${user._id}/profile`)
+  //   }
+  // },[])
   
 
   return (

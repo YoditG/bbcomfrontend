@@ -44,13 +44,13 @@ const SideCard = (props)=>{
                         </Typography>
 
                         <Typography variant="subtitle1" color="textSecondary">
-                            <Link href="#" underline="none" className={classes.linkStyles} >one friend</Link> <br />
-                            <Link href="#" underline="none" className={classes.linkStyles} >another friend</Link> <br />
-                            <Link href="#" underline="none" className={classes.linkStyles} >wow I have so many friends...</Link>
+                            <Link href="#" underline="none" className={classes.linkStyles} >Grand Göran</Link> <br />
+                            <Link href="#" underline="none" className={classes.linkStyles} >Mighty Martin</Link> <br />
+                            <Link href="#" underline="none" className={classes.linkStyles} >Raphi Di Duckie</Link>
                         </Typography>
 
                         <Typography variant="subtitle1" color="primary" >
-                            <Link href="#" underline="none" className={classes.linkStyles} >All events...</Link>
+                            <Link href="#" underline="none" className={classes.linkStyles} >All friends...</Link>
                         </Typography>
                     </CardContent>
                 </div>
