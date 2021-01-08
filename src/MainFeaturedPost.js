@@ -18,9 +18,9 @@ import TeamContext from './contexts/TeamContext'
 
 export default function MainFeaturedPost(props) {
 
-  const {user,setUser} = useContext(UserContext)
-  const {baller,setBaller} = useContext(BallerContext)
-  const {team,setTeam} = useContext(TeamContext)
+  const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
+  // const {baller,setBaller} = useContext(BallerContext)
+  // const {team,setTeam} = useContext(TeamContext)
   
   //const { post } = props;
   //const {userData,setUserData} = useContext(UserDataContext)

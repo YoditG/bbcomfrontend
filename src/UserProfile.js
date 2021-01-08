@@ -22,6 +22,8 @@ import Header from './Header';
 import { userContext } from './utils/auth';
 import axios from 'axios';
 
+const {setAuthHeaders} = require('./utils/auth')
+
 
 
 const UserProfile = () => {
@@ -35,9 +37,12 @@ const UserProfile = () => {
 
     useEffect(()=>{
         const getPosts = async ()=>{
-            const usersPosts = await axios.get(`http://localhost:3000/users/${user._id}/profile`,{withCredentials: true})
-            console.log(usersPosts)
-            setPosts(usersPosts.data)
+            setAuthHeaders()
+            const userData = await axios.get(`http://localhost:3000/users/${user._id}/profile`)
+            console.log(userData)
+            setPosts(userData.data.posts)
+            setBaller(userData.data.baller)
+            setTeam(userData.data.team)
         }
 
         getPosts()

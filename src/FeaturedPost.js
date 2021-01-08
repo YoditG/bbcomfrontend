@@ -95,9 +95,9 @@ export default function FeaturedPost(props) {
   //const { index } = props;
 
   // const {userData,setUserData} = useContext(UserDataContext)
-  const {user,setUser} = useContext(UserContext)
-  const {baller,setBaller} = useContext(BallerContext)
-  const {team,setTeam} = useContext(TeamContext)
+  const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
+  // const {baller,setBaller} = useContext(BallerContext)
+  // const {team,setTeam} = useContext(TeamContext)
   // const posts = userData.posts
 
   const [comments,setComments]= useState(post.comments);

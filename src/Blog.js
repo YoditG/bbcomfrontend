@@ -13,10 +13,6 @@ import Header from './Header'
 import axios from 'axios'
 import Login from './Login'
 import HomePage from './HomePage'
-//import MainFeaturedPost from './MainFeaturedPost';
-//import FeaturedPost from './FeaturedPost';
-//import Main from './Main';
-//import Sidebar from './Sidebar';
 import Cookies from "js-cookie";
 
 import background from './assets/img/bbcom_background.svg'
@@ -33,57 +29,21 @@ import {
   useHistory,
   Redirect
 } from "react-router-dom";
+
+import { useMediaQuery } from 'react-responsive'
+
+
 const {setAuthHeaders} =  require('./utils/auth')
 
 require('dotenv').config()
-// import post1 from './blog-post.1.md';
-// import post2 from './blog-post.2.md';
-// import post3 from './blog-post.3.md';
 
 const { userData, ballerData } = require('./assets/data/userData') 
-
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     //marginTop: theme.spacing(3),
   },
 }));
-
-// const completeTheme = createMuiTheme({
-//     // palette: {
-//     //   background: {
-//     //     backgroundImage: `url(${logo})`,
-       
-//     //   },
-//     // },
-//     overrides: {
-//       MuiCssBaseline: {
-//         "@global": {
-//           body: {
-//               //backgroundImage: `url(${logo})`,
-//               // opacity: 0.1,
-//               //backgroundColor: 'rgb(255,255,255)',
-              
-//               color: 'white',
-              
-             
-//           },
-          
-//         }
-//       }
-//     },
-//     // overlay: {
-//     //   position: 'absolute',
-//     //   top: 0,
-//     //   bottom: 0,
-//     //   right: 0,
-//     //   left: 0,
-//     //   backgroundColor: 'rgb(0,0,0,.8)',
-//     // },
-//   });
-  
-
-//const posts = [post1, post2, post3];
 
 const sidebar = {
   title: 'About',
@@ -109,8 +69,6 @@ const sidebar = {
   ],
 };
 
-
-
 export default function Blog() {
   
   const classes = useStyles();
@@ -126,6 +84,19 @@ export default function Blog() {
   const [loggedIn, setLoggedIn] = useState(false)
   const history = useHistory()
 
+  // --- screensizes for responsive designing -----
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
+  const isBigScreen = useMediaQuery({ query: '(min-device-width: 1824px)' })
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  const isTabletOrMobileDevice = useMediaQuery({
+      query: '(max-device-width: 1224px)'
+  })
+  const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+  const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
+  //-----------------------------------------------------
+
   const handleSetCredentials = (e) => {
     setCredentials(prevCredentials => ({
       ...prevCredentials,
@@ -137,15 +108,6 @@ export default function Blog() {
     const data = await login(credentials)
     console.log(data)
     setUser(data.data.user)
-    // const {user,setUser} = useContext(UserContext)
-      // console.log('this is the user:',data.data.user)
-    // setUser(data.data.user)
-    // if(data.data.baller){
-    //   setBaller(data.data.baller)
-    //   if(data.data.team){
-    //     setTeam(data.data.team)
-    //   }
-    // }
     setLoggedIn(true)
     history.push('/user')
     
@@ -153,65 +115,101 @@ export default function Blog() {
 
   const handleLogout = () => {
     logout()
+    // const item = window.localStorage.removeItem('bbcom-userID')
+    console.log('hallo')
     history.push('/login')
   }
+  useEffect(()=>{
+    const loadUser = async ()=>{
+      const APP_NAME = 'bbcom'
+      const token = Cookies.get(`${APP_NAME}-auth-token`,{path:'/'});
+      if(token){
+        const userID = window.localStorage.getItem('bbcom-userID')
+        setAuthHeaders()
+        const reload = await axios.get(`http://localhost:3000/users/${userID}/userData`)
+        console.log('token:',token)
+        setUser(reload.data.user)
+        return await user
+      }else{
+        history.push('/login')
+      }
+    }
 
-const APP_NAME = 'bbcom'
-const token = Cookies.get(`${APP_NAME}-auth-token`);
-//console.log(token)
-if(token){
-  const userID = window.localStorage.getItem('bbcom-userID')
-  const loadUser = async ()=>{
-    //setAuthHeaders()
-    axios.defaults.headers.common["Access-Control-Allow-Origin"] = 'http://www.localhost:3001';
-    axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization'
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
-    axios.defaults.headers.common["Access-Control-Allow-Methods"] =  "GET, POST, PUT, DELETE"
-    const reload = await axios.get(`http://localhost:3000/users/${userID}/userData`)
-    //console.log(userID)
-  }
-  loadUser()
-  
-}
- 
-  
+    if(!user){
+      loadUser()
+    }
+  },[])
 
   return (
     <>
-       {/* <UserDataContext.Provider value={{ userData, setUserData }}> */}
-        <React.Fragment  >
-          {/* <ThemeProvider theme={completeTheme}> */}
-            <CssBaseline />
-            <Container maxWidth="lg"  >
+      <React.Fragment  >
+        <CssBaseline />
+        <Container maxWidth="lg"  >
 
-              <main >
+          <main >
 
-                <Switch>
-                  <Route path="/login" >
-                    <Login onLogin={handleLogin} onSetCredentials={handleSetCredentials} />
-                  </Route>
-                  {loggedIn&&<TeamContext.Provider value={{ team, setTeam }}>
-                    <BallerContext.Provider value={{ baller, setBaller }}>
-                      <UserContext.Provider value={{ user, setUser }}>
-                        <ProtectedRoute path='/user' onLogout={handleLogout} >
-                        <Header/>
-                        <UserProfile/>
-                        </ProtectedRoute>
+            <Switch>
+            
+              <Route path="/login" >
+                <Login onLogin={handleLogin} onSetCredentials={handleSetCredentials} />
+              </Route>
+              {user &&
+                <ProtectedRoute path='/user' onLogout={handleLogout} >
+                  {/* <TeamContext.Provider value={{ team, setTeam }}>
+                    <BallerContext.Provider value={{ baller, setBaller }}> */}
+                      <UserContext.Provider value={{ user, setUser,baller, setBaller, team, setTeam}}>
+                        <Header />
+                        <UserProfile />
                       </UserContext.Provider>
-                    </BallerContext.Provider>
-                  </TeamContext.Provider>}
-                  <Route path="/" exact>
-                    <HomePage />
-                  </Route>
-                </Switch>
-              </main>
-            </Container>
+                    {/* </BallerContext.Provider>
+                  </TeamContext.Provider> */}
+                </ProtectedRoute>}
+              <Route path="/" exact>
+                <HomePage />
+              </Route>
+            </Switch>
+          </main>
+        </Container>
 
-          {/* </ThemeProvider> */}
-        </React.Fragment>
-      {/* </UserDataContext.Provider>} */}
+      </React.Fragment>
     </>
   );
 }
 
 
+// axios.defaults.headers.common["Access-Control-Allow-Origin"] = 'http://www.localhost:3001';
+//console.log(token)
+// axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization'
+// axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+//axios.defaults.headers.common["Access-Control-Allow-Methods"] =  "GET, POST, PUT, DELETE"
+
+// const completeTheme = createMuiTheme({
+//     // palette: {
+//     //   background: {
+//     //     backgroundImage: `url(${logo})`,
+
+//     //   },
+//     // },
+//     overrides: {
+//       MuiCssBaseline: {
+//         "@global": {
+//           body: {
+//               //backgroundImage: `url(${logo})`,
+//               // opacity: 0.1,
+//               //backgroundColor: 'rgb(255,255,255)',
+//               color: 'white',
+//           },
+//         }
+//       }
+//     },
+//     // overlay: {
+//     //   position: 'absolute',
+//     //   top: 0,
+//     //   bottom: 0,
+//     //   right: 0,
+//     //   left: 0,
+//     //   backgroundColor: 'rgb(0,0,0,.8)',
+//     // },
+//   });
+
+//const posts = [post1, post2, post3];
