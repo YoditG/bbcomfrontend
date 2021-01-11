@@ -28,9 +28,9 @@ const {setAuthHeaders} = require('./utils/auth')
 
 const UserProfile = () => {
     //const {userData,setUserData} = useContext(UserDataContext)
-    const {user,setUser} = useContext(UserContext)
-    const {baller,setBaller} = useContext(BallerContext)
-    const {team,setTeam} = useContext(TeamContext)
+    const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
+    // const {baller,setBaller} = useContext(BallerContext)
+    // const {team,setTeam} = useContext(TeamContext)
     
     const [posts,setPosts] = useState([])
     //const posts = user.posts
