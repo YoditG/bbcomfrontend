@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
   toolbarSecondary: {
     justifyContent: 'space-around',
     overflowX: 'auto',
-    color: 'rgb(13,44,41)',
+    color: 'rgb(52,91,137)',
     marginBottom: '1%',
   },
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
-    borderLeft: '1px solid rgb(13,44,41)',
+    borderLeft: '1px solid rgb(52,91,137)',
     //borderBottom: '1px solid rgb(13,44,41)'
   },
 }));

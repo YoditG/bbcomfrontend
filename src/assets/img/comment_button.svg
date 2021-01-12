@@ -34,8 +34,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.1649824"
-     inkscape:cx="92.20393"
-     inkscape:cy="79.011274"
+     inkscape:cx="120.39966"
+     inkscape:cy="26.317524"
      inkscape:document-units="mm"
      inkscape:current-layer="g1575-2"
      showgrid="false"
@@ -84,61 +84,38 @@
       <g
          id="g1575-2"
          style="stroke-width:3.14629459">
-        <rect
-           style="opacity:0.97000002;fill:#0d2c29;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:6.49709892;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="rect1766"
-           width="186.38817"
-           height="103.52898"
-           x="-264.79276"
-           y="114.81987" />
-        <path
-           style="opacity:0.97000002;fill:#0d292c;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3.66543365;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="path1782"
-           sodipodi:type="arc"
-           sodipodi:cx="-187.40759"
-           sodipodi:cy="222.13503"
-           sodipodi:rx="75.028976"
-           sodipodi:ry="32.271591"
-           sodipodi:start="3.7408691"
-           sodipodi:end="4.6936311"
-           d="m -249.36232,203.93239 a 75.028976,32.271591 0 0 1 60.54743,-14.06328"
-           sodipodi:open="true" />
         <ellipse
            style="opacity:0.97000002;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3.66543365;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
            id="path1788"
            cx="-226.98598"
            cy="189.25453"
            rx="8.7412405"
-           ry="3.3489387" />
+           ry="3.3489387"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
         <ellipse
            style="opacity:0.97000002;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3.66543365;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
            id="path1794"
            cx="-234.75598"
            cy="193.82126"
            rx="0.48562446"
-           ry="1.8266939" />
+           ry="1.8266939"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
         <ellipse
-           style="opacity:0.97000002;fill:#0d292c;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:7.12635756;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           style="opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:6.86774445;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
            id="path1780"
-           cx="-172.0181"
+           cx="-178.57402"
            cy="159.65802"
-           rx="86.975304"
-           ry="30.461298" />
-        <path
-           style="opacity:0.97000002;fill:#0d292c;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3.66543365;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="path1786"
-           sodipodi:type="arc"
-           sodipodi:cx="-272.05673"
-           sodipodi:cy="189.95071"
-           sodipodi:rx="35.693398"
-           sodipodi:ry="18.114714"
-           sodipodi:start="5.619953"
-           sodipodi:end="0.88173177"
-           d="m -243.93011,178.79808 a 35.693398,18.114714 0 0 1 -5.43221,25.13432"
-           sodipodi:open="true" />
+           rx="80.513062"
+           ry="30.561247"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
         <g
            id="g1804"
-           transform="translate(-5.4923401,5.7195751)">
+           transform="translate(-5.4923401,5.7195751)"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96">
           <ellipse
              ry="0.91334695"
              rx="2.9137468"

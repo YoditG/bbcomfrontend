@@ -26,21 +26,53 @@ export default function MainFeaturedPost(props) {
   //const {userData,setUserData} = useContext(UserDataContext)
   const posts = user.post;
  
-
+ const {screenSize}=props 
   const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
       position: 'relative',
-      height: '251px',
-      backgroundColor: 'white',
+      height: ()=>{
+                if(screenSize.isDesktopOrLaptop){
+                  return '251px'
+                }else if(screenSize.isTabletOrMobile){
+                  return '300px'
+                }
+      },
+      width: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '100%'
+        }else if(screenSize.isTabletOrMobile){
+          return '200px'
+        }
+},
+      //backgroundColor: 'white',
       color: 'white', //theme.palette.common.white,
       marginBottom: theme.spacing(4),
       //backgroundImage: `url(${background})`,
-      backgroundColor: 'rgb(13,44,41)',
+      backgroundColor: 'rgb(255,255,255,0.2)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      borderTopLeftRadius: '200px',
-      borderBottomLeftRadius: '200px',
+      borderTopLeftRadius: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '200px'
+        }else if(screenSize.isTabletOrMobile){
+          return '140px'
+        }
+      },
+      borderTopRightRadius: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '0px'
+        }else if(screenSize.isTabletOrMobile){
+          return '140px'
+        }
+      },
+      borderBottomLeftRadius: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '200px'
+        }else if(screenSize.isTabletOrMobile){
+          return '0px'
+        }
+      },
       
     },
     overlay: {
@@ -49,12 +81,12 @@ export default function MainFeaturedPost(props) {
       bottom: 0,
       right: 0,
       left: 0,
-      backgroundColor: 'rgb(13,44,41)',
+      
       //borderRadius: '20px',
     },
     mainFeaturedPostContent: {
       //position: 'relative',
-      padding: theme.spacing(3),
+      padding: screenSize.isDesktopOrLaptop?theme.spacing(3):theme.spacing(1),
       // [theme.breakpoints.up('md')]: {
       //   padding: theme.spacing(6),
       //   paddingRight: 0,
@@ -63,10 +95,39 @@ export default function MainFeaturedPost(props) {
     profilePic:{
       
       position: 'relative',
+      
       borderRadius: '50%',
       
-      width: '250px',
-      height: '250px',
+      // left: ()=>{
+      //   if(screenSize.isDesktopOrLaptop){
+      //     return '0px'
+      //   }else if(screenSize.isTabletOrMobile){
+      //     return '-90px'
+      //   }
+      // },
+      
+      width: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '251px'
+        }else if(screenSize.isTabletOrMobile){
+          return '200px'
+        }
+      },
+      height: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '251px'
+        }else if(screenSize.isTabletOrMobile){
+          return '200px'
+        }
+      },
+
+      // marginLeft: ()=>{
+      //   if(screenSize.isDesktopOrLaptop){
+      //     return 'auto'
+      //   }else if(screenSize.isTabletOrMobile){
+      //     return '50%'
+      //   }
+      // },
       overflow: 'hidden',
       
       // backgroundRepeat: 'no-repeat',
@@ -90,7 +151,13 @@ export default function MainFeaturedPost(props) {
       height: '250px',
     },
     profileInfoBody:{
-      fontSize: '20px',
+      fontSize: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '20px'
+        }else if(screenSize.isTabletOrMobile){
+          return '11px'
+        }
+      },
       maxWidth: '600px',
     }
   }));
@@ -103,7 +170,7 @@ export default function MainFeaturedPost(props) {
   return (
     <Paper className={classes.mainFeaturedPost} >
       {user && 
-      <Grid container style={{ width: '100%' }} direction="row"  >
+      <Grid container style={{ width: '100%' }} direction={screenSize.isTabletOrMobile?"col":"row"}  >
         <Grid item className={classes.profilePicGrid}>
           {/* <div className={classes.profilePic} id={profilePic} >
           </div> */}
@@ -111,7 +178,7 @@ export default function MainFeaturedPost(props) {
         </Grid>
         <Grid item md={5}>
            <div className={classes.mainFeaturedPostContent} paragraph>
-          <Typography variant="h4" color="inherit" style={{marginBottom: '10px'}}>
+          <Typography variant={screenSize.isDesktopOrLaptop?"h4":"h6"} color="inherit" style={{marginBottom: '10px'}}>
             WELCOME, {user.username.toUpperCase()}! 
             </Typography>
             <div  className={classes.profileInfoBody}>
@@ -164,12 +231,12 @@ export default function MainFeaturedPost(props) {
           </Grid> */}
           <Link variant="subtitle1" href="#" underline='none'>
             <Grid>
-              <Button className={classes.button}>friend request</Button>
+              <Button className={classes.button}>edit profile</Button>
             </Grid>
           </Link>
           <Link variant="subtitle1" href="#" underline='none'>
             <Grid>
-              <Button className={classes.button}>send message</Button>
+              <Button className={classes.button}>messenger</Button>
             </Grid>
           </Link>
         </Grid>

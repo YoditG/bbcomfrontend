@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     // display: 'flex',
     //backgroundImage: `url(${background})`,
     //maxWidth: 900,
-    backgroundColor: 'rgb(13,44,41)',
+    backgroundColor: 'rgb(255,255,255,0.2)',
     color: 'white'
   },
   cardDetails: {
@@ -64,22 +64,25 @@ const useStyles = makeStyles({
     
   },
   profilePicGrid: {
-    width: '30px',
-    height: '30px',
+    // width: '60px',
+    height: '60px',
   },
   likeButton:{
     height: '30px',
     width:'30px',
-    marginRight: '5px',
+    // marginRight: '5px',
   },
   actionbarButtons: {
-    borderLeft: 'solid white 1px',
+    borderTop: 'solid white 1px',
   },
   buttonText:{
     color: 'white'
   },
   postDescription:{
     minHeight: '300px'
+  },
+  postTitle:{
+    fontSize: '1.5em'
   }
   
 });
@@ -179,20 +182,22 @@ export default function FeaturedPost(props) {
             <CardContent >
               <Grid direction="column" xs={12} md={12} >
                 <Grid item>
-                  <Grid container direction="row" style={{ marginBottom: '30px' }} justify="space-between">
-                    <Grid item xs={2} className={classes.profilePicGrid}>
+                  <Grid container direction="row" style={{ marginBottom: '30px' }}  >
+                    <Grid item  xs={2} className={classes.profilePicGrid}  >
                       <img alt="profilePic" src={`http://localhost:3000/${post.poster_id.profilePic}`} className={classes.profilePic} />
                     </Grid>
-                    <Grid item xs={3} >
-                      <Typography component="h2" variant="h5" paragraph>
-                        {post.poster_id.username.toUpperCase()}
+                    <Grid item xs={2} >
+                      
+                      <Typography component="h2" variant="h5">
+                        {post.poster_id.username.toUpperCase()}<br/>
                       </Typography>
-                    </Grid>
-                    <Grid item xs={4} >
-                      <Typography variant="subtitle1" paragraph>
+                      <Typography variant="subtitle2" paragraph>
                         {handleDate(post.date)}
                       </Typography>
                     </Grid>
+                    {/* <Grid item xs={2} style={{border: '1px solid black'}} >
+                      
+                    </Grid> */}
                   </Grid>
                 </Grid>
                 <Grid item >
@@ -208,24 +213,24 @@ export default function FeaturedPost(props) {
 
                 <Grid item>
 
-                  <Grid container direction="row" justify="space-around" align="center" >
+                  <Grid container direction="row" justify="space-around" align="center" className={classes.actionbarButtons} >
                     <Grid item>
                       <Button onClick={(e) =>handleLikes(e) }>
                         <img src={logo} alt="logo" className={classes.likeButton} /> <p className={classes.buttonText}> swish {swish[0]}</p>
                       </Button>
                     </Grid>
 
-                    <Grid item className={classes.actionbarButtons}>
+                    <Grid item>
                       <Button  onClick={()=> setCommentBar(!commentBar)}>
-                        <img src={comment} alt="logo" className={classes.likeButton} /><p className={classes.buttonText}>comments</p>
+                        <img src={comment} alt="logo" className={classes.likeButton} /><p className={classes.buttonText}>comments  {comments.length}</p>
                       </Button>
                     </Grid>
-                    <Grid item className={classes.actionbarButtons}>
+                    <Grid item>
                       <Button >
                         <img src={share} alt="logo" className={classes.likeButton} /><p className={classes.buttonText}>share</p>
                       </Button>
                     </Grid>
-                    <Grid item className={classes.actionbarButtons}>
+                    <Grid item>
                       <Button >
                         <p className={classes.buttonText}>3 shares</p>
                       </Button>
@@ -285,7 +290,7 @@ export default function FeaturedPost(props) {
                                   {user.username.toUpperCase()}
                                   </Grid>
                                   <Grid item>
-                                    <input type="text" placeholder="comment..."  style={{width: '100%', height:'40px'}}  onKeyDown={(e)=>handleEnter(e)}/>
+                                    <input type="text" placeholder="comment..."  style={{width: '100%', height:'40px',outlineWidth:'0'}}  onKeyDown={(e)=>handleEnter(e)}/>
                                   </Grid>
                                 </Grid>
                               </Grid>

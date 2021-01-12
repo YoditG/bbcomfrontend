@@ -26,11 +26,12 @@ const {setAuthHeaders} = require('./utils/auth')
 
 
 
-const UserProfile = () => {
+const UserProfile = (props) => {
     //const {userData,setUserData} = useContext(UserDataContext)
     const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
     // const {baller,setBaller} = useContext(BallerContext)
     // const {team,setTeam} = useContext(TeamContext)
+    const {screenSize} = props
     
     const [posts,setPosts] = useState([])
     //const posts = user.posts
@@ -77,7 +78,7 @@ const UserProfile = () => {
     return (
         <>
              
-            {user&& <MainFeaturedPost />}
+            {user&& <MainFeaturedPost screenSize={screenSize}/>}
             <Grid container direction="row" spacing={2} justify="center" >
 
                 <Grid item justify="center" xs={3}>
@@ -98,7 +99,7 @@ const UserProfile = () => {
                     <Grid container direction="column" spacing={2} align="center">
                         {posts&&  posts.map((post,index) => (
                             <Grid item xs={12} >
-                                <FeaturedPost key={index} post={post} index={index} />
+                                <FeaturedPost key={index} post={post} index={index} screenSize={screenSize}/>
                             </Grid>
                         ))}
                     </Grid>

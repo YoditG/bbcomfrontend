@@ -9,18 +9,18 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="59.946655mm"
-   height="41.065521mm"
-   viewBox="0 0 59.946655 41.065521"
+   width="141.3631mm"
+   height="307.67261mm"
+   viewBox="0 0 141.3631 307.67261"
    version="1.1"
-   id="svg8"
-   inkscape:export-filename="/home/yodit/Dokumente/bbcom/bbcomfrontend/src/assets/img/deleteIcon.png"
+   id="svg2893"
+   inkscape:export-filename="/home/yodit/Dokumente/bbcom/bbcomfrontend/src/assets/img/braune_seiten_homepage.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="deleteIcon.svg">
+   sodipodi:docname="brown_sides.svg">
   <defs
-     id="defs2" />
+     id="defs2887" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0543273"
-     inkscape:cx="-29.890208"
-     inkscape:cy="101.7945"
+     inkscape:zoom="0.35"
+     inkscape:cx="-2.857147"
+     inkscape:cy="514.28567"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,14 +44,14 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata5">
+     id="metadata2890">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,20 +59,13 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-39.855724,-148.28404)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:91.13484192px;line-height:1.25;font-family:DokChampa;-inkscape-font-specification:DokChampa;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3.79699998;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;"
-       x="32.335766"
-       y="237.4754"
-       id="text949"
-       transform="scale(1.2668671,0.78934879)"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96"><tspan
-         sodipodi:role="line"
-         id="tspan947"
-         x="32.335766"
-         y="237.4754"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DokChampa;-inkscape-font-specification:DokChampa;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3.79699998;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;">x</tspan></text>
+     transform="translate(-58.964287,22.767857)">
+    <rect
+       style="opacity:0.97000002;fill:#cf6a34;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.66488171;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect3438"
+       width="141.3631"
+       height="307.67261"
+       x="58.964287"
+       y="-22.767857" />
   </g>
 </svg>

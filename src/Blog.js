@@ -95,6 +95,8 @@ export default function Blog() {
   })
   const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
   const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
+
+  const screenSize = {isDesktopOrLaptop,isBigScreen,isTabletOrMobile, isTabletOrMobileDevice,isPortrait,isRetina}
   //-----------------------------------------------------
 
   const handleSetCredentials = (e) => {
@@ -159,7 +161,7 @@ export default function Blog() {
                     <BallerContext.Provider value={{ baller, setBaller }}> */}
                       <UserContext.Provider value={{ user, setUser,baller, setBaller, team, setTeam}}>
                         <Header />
-                        <UserProfile />
+                        <UserProfile screenSize={screenSize} />
                       </UserContext.Provider>
                     {/* </BallerContext.Provider>
                   </TeamContext.Provider> */}

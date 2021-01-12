@@ -8,18 +8,18 @@ const SideCard = (props)=>{
         sideCard: {
             position: 'relative',
             //backgroundImage: `url(${background})`,
-            //backgroundColor: '#aa0000',
+            backgroundColor: 'rgb(255,255,255,0.0)',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            borderRadius: '20px',
+            //borderRadius: '20px',
             color: 'white'
             
           },
           card: {
             display: 'flex',
             //backgroundImage: `url(${background})`,
-            backgroundColor: 'rgb(13,44,41)',
+            backgroundColor: 'rgb(255,255,255,0.2)',
             width: '100%',
             
           },
