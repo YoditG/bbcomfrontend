@@ -13,7 +13,6 @@ import axios from 'axios'
 import './App.css'
 import { Button } from '@material-ui/core';
 import logo from './assets/img/logo_ballin_small.svg'
-//import logo_orange from './assets/img/logo_ballin_small_orange.svg'
 
 import UserContext from './contexts/UserContext'
 import BallerContext from './contexts/BallerContext'
@@ -28,7 +27,7 @@ const useStyles = makeStyles({
     // display: 'flex',
     //backgroundImage: `url(${background})`,
     //maxWidth: 900,
-    backgroundColor: 'rgb(255,255,255,0.2)',
+    backgroundColor: 'rgb(52,91,137,0.4)',
     color: 'white'
   },
   cardDetails: {

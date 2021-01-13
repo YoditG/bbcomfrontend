@@ -331,7 +331,14 @@
              cy="41.484394"
              cx="334.54669"
              id="path7086"
-             style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ed885c;stroke-width:2.4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+             style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#cf6a34;stroke-width:2.4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+          <ellipse
+             ry="20.868607"
+             rx="20.519133"
+             cy="41.55909"
+             cx="334.53403"
+             id="path7086-8"
+             style="opacity:0.4;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#345b89;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
         </g>
       </g>
     </g>

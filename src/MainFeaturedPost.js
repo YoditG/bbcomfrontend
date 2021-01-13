@@ -48,7 +48,7 @@ export default function MainFeaturedPost(props) {
       color: 'white', //theme.palette.common.white,
       marginBottom: theme.spacing(4),
       //backgroundImage: `url(${background})`,
-      backgroundColor: 'rgb(255,255,255,0.2)',
+      backgroundColor: 'rgb(52,91,137,0.4)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
