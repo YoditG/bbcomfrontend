@@ -18,7 +18,7 @@ const SideCard = (props)=>{
           card: {
             display: 'flex',
             //backgroundImage: `url(${background})`,
-            backgroundColor: 'rgb(52,91,137,0.4)',
+            backgroundColor: 'rgb(0,0,0)',
             width: '100%',
             
           },

@@ -79,7 +79,7 @@ const UserProfile = (props) => {
         <>
              
             {user&& <MainFeaturedPost screenSize={screenSize}/>}
-            <Grid container direction="row" spacing={2} justify="center" >
+            <Grid container direction={screenSize.isTabletOrMobile?"col":"row"} spacing={2} justify="center" >
 
                 <Grid item justify="center" xs={3}>
                     <Grid container direction="column" spacing={2} >
@@ -121,12 +121,3 @@ const UserProfile = (props) => {
 
 export default UserProfile;
 
-//   <Grid container spacing={4} className={classes.mainGrid}>
-//                         {/* <Main title="From the firehose" posts={posts} /> */}
-//                         <Sidebar
-//                             title={sidebar.title}
-//                             description={sidebar.description}
-//                             archives={sidebar.archives}
-//                             social={sidebar.social}
-//                         />
-//                     </Grid>

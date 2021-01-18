@@ -19,17 +19,33 @@ import TeamContext from './contexts/TeamContext'
 export default function MainFeaturedPost(props) {
 
   const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
-  // const {baller,setBaller} = useContext(BallerContext)
-  // const {team,setTeam} = useContext(TeamContext)
-  
-  //const { post } = props;
-  //const {userData,setUserData} = useContext(UserDataContext)
   const posts = user.post;
  
  const {screenSize}=props 
   const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
-      position: 'relative',
+      position: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return 'relative'
+        }else if(screenSize.isTabletOrMobile){
+          return 'absolute'
+        }
+      },
+      left: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '0%'
+        }else if(screenSize.isTabletOrMobile){
+          return '50%'
+        }
+      },
+      transform:()=>{ if(screenSize.isDesktopOrLaptop){
+        return 'translate(0%, 0%)'
+      }else if(screenSize.isTabletOrMobile){
+        return 'translate(-50%, 0%)'
+      }
+    },
+      display: 'flex',
+      justifyContent: 'center',
       height: ()=>{
                 if(screenSize.isDesktopOrLaptop){
                   return '251px'
@@ -43,12 +59,13 @@ export default function MainFeaturedPost(props) {
         }else if(screenSize.isTabletOrMobile){
           return '200px'
         }
-},
+      },
+      align: "center",
       //backgroundColor: 'white',
       color: 'white', //theme.palette.common.white,
       marginBottom: theme.spacing(4),
       //backgroundImage: `url(${background})`,
-      backgroundColor: 'rgb(52,91,137,0.4)',
+      backgroundColor: 'rgb(0,0,0)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
@@ -85,8 +102,10 @@ export default function MainFeaturedPost(props) {
       //borderRadius: '20px',
     },
     mainFeaturedPostContent: {
+      width: '100%',
       //position: 'relative',
       padding: screenSize.isDesktopOrLaptop?theme.spacing(3):theme.spacing(1),
+      
       // [theme.breakpoints.up('md')]: {
       //   padding: theme.spacing(6),
       //   paddingRight: 0,
@@ -142,9 +161,9 @@ export default function MainFeaturedPost(props) {
      
     },
     button:{
-      border: 'solid 2px white',
+      border: 'solid 2px rgb(100,100,100)',
       width: '50%',
-      color: 'white'
+      color: 'rgb(100,100,100)'
     },
     profilePicGrid: {
       width: '250px',
@@ -170,14 +189,14 @@ export default function MainFeaturedPost(props) {
   return (
     <Paper className={classes.mainFeaturedPost} >
       {user && 
-      <Grid container style={{ width: '100%' }} direction={screenSize.isTabletOrMobile?"col":"row"}  >
+      <Grid container style={{ width: '100%' }} direction={screenSize.isTabletOrMobile?"col":"row"} >
         <Grid item className={classes.profilePicGrid}>
           {/* <div className={classes.profilePic} id={profilePic} >
           </div> */}
           <img id="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
         </Grid>
-        <Grid item md={5}>
-           <div className={classes.mainFeaturedPostContent} paragraph>
+        <Grid item >
+          <div className={classes.mainFeaturedPostContent} paragraph>
           <Typography variant={screenSize.isDesktopOrLaptop?"h4":"h6"} color="inherit" style={{marginBottom: '10px'}}>
             WELCOME, {user.username.toUpperCase()}! 
             </Typography>
@@ -244,7 +263,3 @@ export default function MainFeaturedPost(props) {
     </Paper>
   );
 }
-
-// MainFeaturedPost.propTypes = {
-//   post: PropTypes.object,
-// }; <Typography variant="h5" color="inherit" paragraph>

@@ -11,9 +11,9 @@ const HomePage = () =>{
 
     const useStyles = makeStyles({
         button:{
-            border: 'solid 4px rgb(207,106,52) ',
+            border: 'solid 4px rgb(100,100,100) ',
             borderRadius: '10px',
-            backgroundColor: 'rgb(207,106,52)',
+            backgroundColor: 'rgb(100,100,100)',
             color: 'rgb(0,0,0)',
             width: '100px',
             fontWeight: 'bold',

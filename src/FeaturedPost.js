@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     // display: 'flex',
     //backgroundImage: `url(${background})`,
     //maxWidth: 900,
-    backgroundColor: 'rgb(52,91,137,0.4)',
+    backgroundColor: 'rgb(0,0,0)',
     color: 'white'
   },
   cardDetails: {
@@ -59,11 +59,12 @@ const useStyles = makeStyles({
   media: {
     //height: 0,
     paddingTop: '56.25%', // 16:9
-    minWidth: '100%'
+    minWidth: '100%',
+    borderTop: '1px solid rgb100,100,100)'
     
   },
   profilePicGrid: {
-    // width: '60px',
+    width: '100%',
     height: '60px',
   },
   likeButton:{
@@ -72,7 +73,7 @@ const useStyles = makeStyles({
     // marginRight: '5px',
   },
   actionbarButtons: {
-    borderTop: 'solid white 1px',
+    borderTop: 'solid rgb(100,100,100) 1px',
   },
   buttonText:{
     color: 'white'
@@ -82,6 +83,9 @@ const useStyles = makeStyles({
   },
   postTitle:{
     fontSize: '1.5em'
+  },
+  date:{
+    color: 'rgb(70,70,70)',
   }
   
 });
@@ -181,22 +185,28 @@ export default function FeaturedPost(props) {
             <CardContent >
               <Grid direction="column" xs={12} md={12} >
                 <Grid item>
-                  <Grid container direction="row" style={{ marginBottom: '30px' }}  >
-                    <Grid item  xs={2} className={classes.profilePicGrid}  >
+                  <Grid container direction="row" style={{ marginBottom: '30px' }} alignContent="center" >
+                    <Grid item  xs={2}   >
                       <img alt="profilePic" src={`http://localhost:3000/${post.poster_id.profilePic}`} className={classes.profilePic} />
+                    </Grid>
+                    <Grid item xs={7} style={{paddingTop: '1%', marginLeft: '-2%'}} >
+                      <Grid container direction="column" alignContent="flex-start">
+                      <Grid item>
+                      <Typography component="h2" variant="h5" >
+                        {post.poster_id.username.toUpperCase()}<br/>
+                      </Typography>
+                      </Grid>
+                      <Grid item>
+                      <Typography variant="subtitle2" paragraph className={classes.date}>
+                        {handleDate(post.date)}
+                      </Typography>
+                      </Grid>
+                      </Grid>
                     </Grid>
                     <Grid item xs={2} >
                       
-                      <Typography component="h2" variant="h5">
-                        {post.poster_id.username.toUpperCase()}<br/>
-                      </Typography>
-                      <Typography variant="subtitle2" paragraph>
-                        {handleDate(post.date)}
-                      </Typography>
                     </Grid>
-                    {/* <Grid item xs={2} style={{border: '1px solid black'}} >
-                      
-                    </Grid> */}
+
                   </Grid>
                 </Grid>
                 <Grid item >
@@ -206,9 +216,9 @@ export default function FeaturedPost(props) {
                     </Typography>
                   </CardActionArea>
                 </Grid>
-                <Grid item >
+                {post.image &&<Grid item >
                   <CardMedia className={classes.media} image={`http://localhost:3000/${post.image}`} title={post.imageTitle} />
-                </Grid>
+                </Grid>}
 
                 <Grid item>
 
@@ -245,7 +255,7 @@ export default function FeaturedPost(props) {
                       {comments.map((comment, ii) => {
                         return (
                           <Grid key={ii} item>
-                            <Grid container direction="row" justify="space-around" style={{borderTop: '1px solid white',paddingTop: '20px',paddingBottom: '20px'}} alignItems="center">
+                            <Grid container direction="row" justify="space-around" style={{borderTop: '1px solid rgb(100,100,100)',paddingTop: '10px',paddingBottom: '10px'}} alignItems="center">
 
                               <Grid xs={1} item>
                                 <img alt="profilePic" src={`http://localhost:3000/${post.poster_id.profilePic}`} className={classes.profilePic} />
@@ -260,10 +270,10 @@ export default function FeaturedPost(props) {
 
                               <Grid item xs={2}>
                               <Grid container direction="column">
-                              <Grid item>
-                                {handleDate(comment.date)}
+                              <Grid item >
+                                <p className={classes.date}>{handleDate(comment.date)}</p>
                                 </Grid>
-                                <Grid item >
+                                <Grid item style={{ marginTop: '-10%'}} >
                                 <Button onClick={(e)=>handleDelComment(comment._id,comment.user_id._id,post.poster_id._id,user._id)}><img alt="deleteIcon" src={deleteIcon} style={{width:'25%'}}/></Button>
                                 </Grid>
                                 </Grid>
@@ -277,23 +287,25 @@ export default function FeaturedPost(props) {
                   </Grid>}
 
                   <Grid item>
-                            <Grid container direction="row" justify="space-around" style={{borderTop: '1px solid white',paddingTop: '20px'}} alignItems="center">
+                            <Grid container direction="row" justify="space-around" style={{borderTop: '1px solid rgb(100,100,100)',paddingTop: '20px'}} alignItems="center">
 
-                              <Grid  item>
+                              <Grid  item xs={1}>
                                 <img alt="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic} />
                               </Grid>
 
-                              <Grid xs={10}item>
+                              <Grid xs={7}item>
                                 <Grid container direction="column" align="start">
                                   <Grid item>
                                   {user.username.toUpperCase()}
                                   </Grid>
                                   <Grid item>
-                                    <input type="text" placeholder="comment..."  style={{width: '100%', height:'40px',outlineWidth:'0'}}  onKeyDown={(e)=>handleEnter(e)}/>
+                                    <input type="text" placeholder="comment..."  style={{width: '135%', height:'40px',outlineWidth:'0'}}  onKeyDown={(e)=>handleEnter(e)}/>
                                   </Grid>
                                 </Grid>
                               </Grid>
-
+                              <Grid item xs={2}>
+                                
+                              </Grid>
                               
                             </Grid>
 
