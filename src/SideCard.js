@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Paper, Typography,CardActionArea,Card,CardContent,Hidden,CardMedia, Link } from '@material-ui/core';
+import {  Paper, Typography,Card,CardContent, Link } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles'
 
 const SideCard = (props)=>{
@@ -7,18 +7,16 @@ const SideCard = (props)=>{
     const useStyles = makeStyles({
         sideCard: {
             position: 'relative',
-            //backgroundImage: `url(${background})`,
             backgroundColor: 'rgb(255,255,255,0.0)',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            //borderRadius: '20px',
             color: 'white'
             
           },
           card: {
             display: 'flex',
-            //backgroundImage: `url(${background})`,
+            borderRadius: '20px',
             backgroundColor: 'rgb(0,0,0)',
             width: '100%',
             
@@ -29,7 +27,10 @@ const SideCard = (props)=>{
             margin: '10px',
           },
           linkStyles:{
-              color: 'white',
+              color: 'rgb(200,200,200)',
+              '&:hover': {
+                textShadow: "0 0 3px rgb(200,200,200), 0 0 5px rgb(200,200,200,0.7)",
+            },
           }
     })
 
@@ -46,9 +47,7 @@ const SideCard = (props)=>{
 
                         <Typography variant="subtitle1" color="textSecondary">
                             <Link href="#" underline="none" className={classes.linkStyles}  >The Basketball Tour..., 12/16/2020</Link> <br />
-                            <Link href="#" underline="none" className={classes.linkStyles} >TSV Berghausen vs TB..., 01/10/2021</Link> <br />
-                            {/* <Link href="#" underline="none" className={classes.linkStyles} >wow I am so busy...</Link> */}
-                        </Typography>
+                            <Link href="#" underline="none" className={classes.linkStyles} >TSV Berghausen vs TB..., 01/10/2021</Link> <br />                        </Typography>
 
                         <Typography variant="subtitle1" color="primary" >
                             <Link href="#" underline="none" className={classes.linkStyles} >All events...</Link>
@@ -56,8 +55,6 @@ const SideCard = (props)=>{
                     </CardContent>
                 </div>
             </Card>
-
-            {/* <Typography>description</Typography> */}
         </Paper>
     )
 

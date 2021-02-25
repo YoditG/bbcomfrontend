@@ -15,7 +15,10 @@
    version="1.1"
    id="svg1867"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="share_button.svg">
+   sodipodi:docname="share_button.svg"
+   inkscape:export-filename="/home/yodit/Dokumente/bbcom/bbcomfrontend/src/assets/img/share_button.svg.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs1861" />
   <sodipodi:namedview
@@ -26,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.4723636"
-     inkscape:cx="80.357171"
+     inkscape:cx="126.89433"
      inkscape:cy="89.069273"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -57,10 +60,21 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(87.342186,-152.24477)">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.51424301;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect4858"
+       width="61.105198"
+       height="34.434914"
+       x="-87.395126"
+       y="155.93124"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <g
        id="g2548"
        transform="matrix(1.5235394,0,0,1.4176723,37.739514,-76.197995)"
-       style="stroke-width:0.6804328">
+       style="stroke-width:0.6804328"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <path
          inkscape:connector-curvature="0"
          id="path2457"

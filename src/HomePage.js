@@ -1,34 +1,30 @@
-import { Home } from '@material-ui/icons'
 import React from 'react'
-import logo from './assets/img/bbcom_homepage.svg.png'
+import logo from './assets/img/theme_wolf/logo_final.png'
 import { Grid,Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom'
-import brownside from './assets/img/brown_sides.svg'
-
 
 const HomePage = () =>{
 
     const useStyles = makeStyles({
         button:{
-            border: 'solid 4px rgb(100,100,100) ',
+            border: 'solid 4px rgb(0,0,0) ',
             borderRadius: '10px',
-            backgroundColor: 'rgb(100,100,100)',
-            color: 'rgb(0,0,0)',
+            backgroundColor: 'rgb(0,0,0)',
+            color: 'rgb(255,0,0)',
             width: '100px',
+            fontFamily: 'PT Serif',
             fontWeight: 'bold',
-            '&:hover': {
-                backgroundColor: 'rgb(255,255,255)',
-            }
+            fontStyle: 'italic',
         }
     }) 
     const classes = useStyles()
 
     return(
         
-        <Grid container direction="column"  justify="space-around" align="center" style={{paddingTop: '5%'}} spacing={3}>
+        <Grid container direction="column"  justify="center" align="center"  spacing={3}>
             <Grid item>
-                <img src={logo} alt="logo" style={{width: '30%',marginBottom:'30%'}}/>
+                <img src={logo} alt="logo" style={{width: '50%',marginBottom:'-8%'}}/>
             </Grid>
             <Grid item>
                 <Grid container direction="row" justify="center" align="flex-end"  spacing={10}>

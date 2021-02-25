@@ -1,29 +1,25 @@
-import React,{useContext,useState} from 'react';
-import PropTypes from 'prop-types';
+import React,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import profilePic from './assets/img/profile_pic.jpg'
+
 import {Button} from '@material-ui/core';
-import { FormatBold } from '@material-ui/icons';
-import UserDataContext from './contexts/UserDataContext'
-import background from './assets/img/bbcom_background.svg'
 import './App.css'
 
 import UserContext from './contexts/UserContext'
-import BallerContext from './contexts/BallerContext'
-import TeamContext from './contexts/TeamContext' 
+
 
 export default function MainFeaturedPost(props) {
 
   const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
-  const posts = user.post;
- 
- const {screenSize}=props 
+  
+
+  const {screenSize}=props 
   const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
+      boxShadow: 'rgb(20,29,184)',
       position: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return 'relative'
@@ -50,7 +46,7 @@ export default function MainFeaturedPost(props) {
                 if(screenSize.isDesktopOrLaptop){
                   return '251px'
                 }else if(screenSize.isTabletOrMobile){
-                  return '300px'
+                  return '350px'
                 }
       },
       width: ()=>{
@@ -61,14 +57,13 @@ export default function MainFeaturedPost(props) {
         }
       },
       align: "center",
-      //backgroundColor: 'white',
-      color: 'white', //theme.palette.common.white,
-      marginBottom: theme.spacing(4),
-      //backgroundImage: `url(${background})`,
+      color: 'rgb(200,200,200)',
+      marginBottom: theme.spacing(1),
       backgroundColor: 'rgb(0,0,0)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
+      borderRadius: '20px',
       borderTopLeftRadius: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return '200px'
@@ -78,7 +73,7 @@ export default function MainFeaturedPost(props) {
       },
       borderTopRightRadius: ()=>{
         if(screenSize.isDesktopOrLaptop){
-          return '0px'
+          return '20px'
         }else if(screenSize.isTabletOrMobile){
           return '140px'
         }
@@ -87,7 +82,7 @@ export default function MainFeaturedPost(props) {
         if(screenSize.isDesktopOrLaptop){
           return '200px'
         }else if(screenSize.isTabletOrMobile){
-          return '0px'
+          return '20px'
         }
       },
       
@@ -98,33 +93,17 @@ export default function MainFeaturedPost(props) {
       bottom: 0,
       right: 0,
       left: 0,
-      
-      //borderRadius: '20px',
     },
     mainFeaturedPostContent: {
       width: '100%',
-      //position: 'relative',
-      padding: screenSize.isDesktopOrLaptop?theme.spacing(3):theme.spacing(1),
-      
-      // [theme.breakpoints.up('md')]: {
-      //   padding: theme.spacing(6),
-      //   paddingRight: 0,
-      // },
+      padding: screenSize.isDesktopOrLaptop?theme.spacing(2):theme.spacing(1),
     },
     profilePic:{
       
       position: 'relative',
       
       borderRadius: '50%',
-      
-      // left: ()=>{
-      //   if(screenSize.isDesktopOrLaptop){
-      //     return '0px'
-      //   }else if(screenSize.isTabletOrMobile){
-      //     return '-90px'
-      //   }
-      // },
-      
+
       width: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return '251px'
@@ -140,30 +119,24 @@ export default function MainFeaturedPost(props) {
         }
       },
 
-      // marginLeft: ()=>{
-      //   if(screenSize.isDesktopOrLaptop){
-      //     return 'auto'
-      //   }else if(screenSize.isTabletOrMobile){
-      //     return '50%'
-      //   }
-      // },
       overflow: 'hidden',
-      
-      // backgroundRepeat: 'no-repeat',
-      // backgroundPosition: 'center center',
-      // backgroundSize: 'cover',
-      // backgroundImage: `url(${profilePic})`,
-      // position: 'absolute',
-      //  top: '50%',
-      //  transform: 'translateY(-50%)',
-    // transform: translateY(-50%);
-      //border: 'solid 5px white',
-     
     },
+    
     button:{
-      border: 'solid 2px rgb(100,100,100)',
-      width: '50%',
-      color: 'rgb(100,100,100)'
+
+      backgroundColor: 'rgb(0,0,0)',
+      color: 'rgb(200,200,200)',
+      '&:hover': {
+        textShadow: "0 0 3px rgb(200,200,200), 0 0 5px rgb(200,200,200,0.7)",
+          
+      },
+      
+    },
+
+    title:{
+      marginBottom: '10px',
+      marginTop:screenSize.isTabletOrMobile?'-25%':'0',
+      
     },
     profilePicGrid: {
       width: '250px',
@@ -182,23 +155,19 @@ export default function MainFeaturedPost(props) {
   }));
 
   const classes = useStyles();
-  
 
- 
 
   return (
     <Paper className={classes.mainFeaturedPost} >
       {user && 
-      <Grid container style={{ width: '100%' }} direction={screenSize.isTabletOrMobile?"col":"row"} >
+      <Grid container style={{ width: '100%' }}  direction={screenSize.isTabletOrMobile?"col":"row"} >
         <Grid item className={classes.profilePicGrid}>
-          {/* <div className={classes.profilePic} id={profilePic} >
-          </div> */}
-          <img id="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
+          <img id="profilePic" alt="" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
         </Grid>
-        <Grid item >
+        <Grid item  xs={7}>
           <div className={classes.mainFeaturedPostContent} paragraph>
-          <Typography variant={screenSize.isDesktopOrLaptop?"h4":"h6"} color="inherit" style={{marginBottom: '10px'}}>
-            WELCOME, {user.username.toUpperCase()}! 
+          <Typography variant={screenSize.isDesktopOrLaptop?"h4":"h6"} color="inherit" className={classes.title}>
+            WELCOME {user.username.toUpperCase()} 
             </Typography>
             <div  className={classes.profileInfoBody}>
             {user.role &&
@@ -242,22 +211,21 @@ export default function MainFeaturedPost(props) {
             </div>
           </div>
         </Grid>
-        <Grid item container md={4} direction="column" justify="center" align="end" >
-          {/* <Grid item  >
+        <Grid item container xs={2} direction="column" justify="center"  spacing={2}>
+          
+            <Grid item>
             <Link variant="subtitle1" href="#" underline='none'>
-              <Button className={classes.button}>more info</Button>
-            </Link>
-          </Grid> */}
-          <Link variant="subtitle1" href="#" underline='none'>
-            <Grid>
-              <Button className={classes.button}>edit profile</Button>
+              <Button className={classes.button} >edit profile</Button>
+              </Link>
             </Grid>
-          </Link>
-          <Link variant="subtitle1" href="#" underline='none'>
-            <Grid>
-              <Button className={classes.button}>messenger</Button>
+          
+          
+            <Grid item >
+            <Link variant="subtitle1" href="#" underline='none'>
+              <Button className={classes.button} >messenger</Button>
+              </Link>
             </Grid>
-          </Link>
+          
         </Grid>
       </Grid>}
     </Paper>
