@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "development") {
   }
 
 const setAuthHeaders = () => {
-  const token = Cookies.get(`${APP_NAME}-auth-token`);
+  const token = Cookies.get(`${APP_NAME}-auth-token`,{path:'/'});
   //console.log(token)
   if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -23,7 +23,7 @@ const setAuthHeaders = () => {
 }
 
 const decodeToken = () => {
-    const token = Cookies.get(`${APP_NAME}-auth-token`);
+    const token = Cookies.get(`${APP_NAME}-auth-token`,{path:'/'});
     console.log('token:',token)
     let decodedToken
     try {
@@ -56,14 +56,14 @@ const login = async (credentials) => {
         password
       })
       
-
+      //console.log(data.headers)
       
       const token = data.headers['x-authorization-token'];
       
-
+      //console.log(token)
 
       if (token) {
-          Cookies.set(`${APP_NAME}-auth-token`, token);
+          Cookies.set(`${APP_NAME}-auth-token`, token,{path:'/'},{expires: -1});
           window.localStorage.setItem('bbcom-userID',`${data.data.user._id}`)
           setAuthHeaders()
           
@@ -75,8 +75,9 @@ const login = async (credentials) => {
   }
 
   const logout = () => {
-    Cookies.remove(`${APP_NAME}-auth-token`);
+    Cookies.delete(`${APP_NAME}-auth-token`,{path:'/'});
   }
+
 
   const userContext = async () => {
     setAuthHeaders()

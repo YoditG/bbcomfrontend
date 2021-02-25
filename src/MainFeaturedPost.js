@@ -1,46 +1,90 @@
-import React,{useContext,useState} from 'react';
-import PropTypes from 'prop-types';
+import React,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import profilePic from './assets/img/profile_pic.jpg'
+
 import {Button} from '@material-ui/core';
-import { FormatBold } from '@material-ui/icons';
-import UserDataContext from './contexts/UserDataContext'
-import background from './assets/img/bbcom_background.svg'
 import './App.css'
 
 import UserContext from './contexts/UserContext'
-import BallerContext from './contexts/BallerContext'
-import TeamContext from './contexts/TeamContext' 
+
 
 export default function MainFeaturedPost(props) {
 
-  const {user,setUser} = useContext(UserContext)
-  const {baller,setBaller} = useContext(BallerContext)
-  const {team,setTeam} = useContext(TeamContext)
+  const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
   
-  //const { post } = props;
-  //const {userData,setUserData} = useContext(UserDataContext)
-  const posts = user.post;
- 
 
+  const {screenSize}=props 
   const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
-      position: 'relative',
-      height: '251px',
-      backgroundColor: 'white',
-      color: 'white', //theme.palette.common.white,
-      marginBottom: theme.spacing(4),
-      //backgroundImage: `url(${background})`,
-      backgroundColor: 'rgb(13,44,41)',
+      boxShadow: 'rgb(20,29,184)',
+      position: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return 'relative'
+        }else if(screenSize.isTabletOrMobile){
+          return 'absolute'
+        }
+      },
+      left: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '0%'
+        }else if(screenSize.isTabletOrMobile){
+          return '50%'
+        }
+      },
+      transform:()=>{ if(screenSize.isDesktopOrLaptop){
+        return 'translate(0%, 0%)'
+      }else if(screenSize.isTabletOrMobile){
+        return 'translate(-50%, 0%)'
+      }
+    },
+      display: 'flex',
+      justifyContent: 'center',
+      height: ()=>{
+                if(screenSize.isDesktopOrLaptop){
+                  return '251px'
+                }else if(screenSize.isTabletOrMobile){
+                  return '350px'
+                }
+      },
+      width: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '100%'
+        }else if(screenSize.isTabletOrMobile){
+          return '200px'
+        }
+      },
+      align: "center",
+      color: 'rgb(200,200,200)',
+      marginBottom: theme.spacing(1),
+      backgroundColor: 'rgb(0,0,0)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      borderTopLeftRadius: '200px',
-      borderBottomLeftRadius: '200px',
+      borderRadius: '20px',
+      borderTopLeftRadius: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '200px'
+        }else if(screenSize.isTabletOrMobile){
+          return '140px'
+        }
+      },
+      borderTopRightRadius: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '20px'
+        }else if(screenSize.isTabletOrMobile){
+          return '140px'
+        }
+      },
+      borderBottomLeftRadius: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '200px'
+        }else if(screenSize.isTabletOrMobile){
+          return '20px'
+        }
+      },
       
     },
     overlay: {
@@ -49,70 +93,81 @@ export default function MainFeaturedPost(props) {
       bottom: 0,
       right: 0,
       left: 0,
-      backgroundColor: 'rgb(13,44,41)',
-      //borderRadius: '20px',
     },
     mainFeaturedPostContent: {
-      //position: 'relative',
-      padding: theme.spacing(3),
-      // [theme.breakpoints.up('md')]: {
-      //   padding: theme.spacing(6),
-      //   paddingRight: 0,
-      // },
+      width: '100%',
+      padding: screenSize.isDesktopOrLaptop?theme.spacing(2):theme.spacing(1),
     },
     profilePic:{
       
       position: 'relative',
+      
       borderRadius: '50%',
-      
-      width: '250px',
-      height: '250px',
+
+      width: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '251px'
+        }else if(screenSize.isTabletOrMobile){
+          return '200px'
+        }
+      },
+      height: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '251px'
+        }else if(screenSize.isTabletOrMobile){
+          return '200px'
+        }
+      },
+
       overflow: 'hidden',
-      
-      // backgroundRepeat: 'no-repeat',
-      // backgroundPosition: 'center center',
-      // backgroundSize: 'cover',
-      // backgroundImage: `url(${profilePic})`,
-      // position: 'absolute',
-      //  top: '50%',
-      //  transform: 'translateY(-50%)',
-    // transform: translateY(-50%);
-      //border: 'solid 5px white',
-     
     },
+    
     button:{
-      border: 'solid 2px white',
-      width: '50%',
-      color: 'white'
+
+      backgroundColor: 'rgb(0,0,0)',
+      color: 'rgb(200,200,200)',
+      '&:hover': {
+        textShadow: "0 0 3px rgb(200,200,200), 0 0 5px rgb(200,200,200,0.7)",
+          
+      },
+      
+    },
+
+    title:{
+      marginBottom: '10px',
+      marginTop:screenSize.isTabletOrMobile?'-25%':'0',
+      
     },
     profilePicGrid: {
       width: '250px',
       height: '250px',
     },
     profileInfoBody:{
-      fontSize: '20px',
+      fontSize: ()=>{
+        if(screenSize.isDesktopOrLaptop){
+          return '20px'
+        }else if(screenSize.isTabletOrMobile){
+          return '11px'
+        }
+      },
       maxWidth: '600px',
     }
   }));
 
   const classes = useStyles();
-  
 
- 
 
   return (
     <Paper className={classes.mainFeaturedPost} >
       {user && 
-      <Grid container style={{ width: '100%' }} direction="row"  >
+      <Grid container style={{ width: '100%' }}  direction={screenSize.isTabletOrMobile?"col":"row"} >
         <Grid item className={classes.profilePicGrid}>
-          {/* <div className={classes.profilePic} id={profilePic} >
-          </div> */}
-          <img id="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
+          <img id="profilePic" alt="" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
         </Grid>
-        <Grid item md={5}>
-           <div className={classes.mainFeaturedPostContent} paragraph>
-          <Typography variant="h4" color="inherit" style={{marginBottom: '10px'}}>
-            WELCOME, {user.username.toUpperCase()}! 
+        <Grid item  xs={7}>
+          <div className={classes.mainFeaturedPostContent} paragraph>
+          <Typography variant={screenSize.isDesktopOrLaptop?"h4":"h6"} color="inherit" className={classes.title}>
+            WELCOME {user.username.toUpperCase()} 
             </Typography>
             <div  className={classes.profileInfoBody}>
             {user.role &&
@@ -156,28 +211,23 @@ export default function MainFeaturedPost(props) {
             </div>
           </div>
         </Grid>
-        <Grid item container md={4} direction="column" justify="center" align="end" >
-          {/* <Grid item  >
+        <Grid item container xs={2} direction="column" justify="center"  spacing={2}>
+          
+            <Grid item>
             <Link variant="subtitle1" href="#" underline='none'>
-              <Button className={classes.button}>more info</Button>
-            </Link>
-          </Grid> */}
-          <Link variant="subtitle1" href="#" underline='none'>
-            <Grid>
-              <Button className={classes.button}>friend request</Button>
+              <Button className={classes.button} >edit profile</Button>
+              </Link>
             </Grid>
-          </Link>
-          <Link variant="subtitle1" href="#" underline='none'>
-            <Grid>
-              <Button className={classes.button}>send message</Button>
+          
+          
+            <Grid item >
+            <Link variant="subtitle1" href="#" underline='none'>
+              <Button className={classes.button} >messenger</Button>
+              </Link>
             </Grid>
-          </Link>
+          
         </Grid>
       </Grid>}
     </Paper>
   );
 }
-
-// MainFeaturedPost.propTypes = {
-//   post: PropTypes.object,
-// }; <Typography variant="h5" color="inherit" paragraph>

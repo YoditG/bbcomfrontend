@@ -1,17 +1,10 @@
 import React,{useContext, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
 import {Link,Grid} from '@material-ui/core';
-import landingPageIcon from './assets/img/logo_ballin_small_orange.png'
-//import UserDataContext from './contexts/UserDataContext'
+import landingPageIcon from './assets/img/theme_wolf/logo_button.png'
 import UserContext from './contexts/UserContext'
-import logo from './assets/img/landingPageIcon.svg'
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -24,58 +17,49 @@ const useStyles = makeStyles((theme) => ({
   toolbarSecondary: {
     justifyContent: 'space-around',
     overflowX: 'auto',
-    color: 'rgb(13,44,41)',
+    color: 'rgb(200,200,200)',
+    fontFamily: 'PT Serif',
     marginBottom: '1%',
   },
   toolbarLink: {
     padding: theme.spacing(1),
-    flexShrink: 0,
-    borderLeft: '1px solid rgb(13,44,41)',
-    //borderBottom: '1px solid rgb(13,44,41)'
+    flexShrink: 0,    
+    borderLeft: '1px solid rgb(200,200,200)',
+    '&:hover': {
+      textShadow: "0 0 3px rgb(200,200,200), 0 0 5px rgb(200,200,200,0.7)",
   },
+},
+  searchbar:{
+    lineHeight: "200%",
+    borderRadius: "10px",
+    border: "solid rgb(0,0,31,0.7) 1px",
+    textarea:{
+      backgroundColor: "rgb(200,200,200)",
+    },
+    outline: "none",
+    marginLeft: "-16%"
+  }
 }));
 
 export default function Header(props) {
   const classes = useStyles();
-  //const { sections, title } = props;
   const {user,setUser} = useContext(UserContext)
   console.log(user)
   const sections = [
-    {sec: user.username, url: '#'  },
+    {sec: user.username, url: `/user/${user._id}`  },
     {sec: 'messenger', url: '#' },
     {sec: 'log out', url: '/' }
   ]
-
-  // useEffect(()=>{
-  //   const getUser = async ()=>{
-  //     await axios.get(`http://localhost:3000/users/${user._id}/profile`)
-  //   }
-  // },[])
   
-
   return (
     <React.Fragment>
-      {/* <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          {title}
-        </Typography>
-        
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button>
-      </Toolbar> */}
-
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-      <Button style={{width: "5%"}}><img src={landingPageIcon} alt="landing page" style={{width: "80%"}} /></Button>
       
+      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+    
+        <Button style={{width: "6%"}} href={`/user/${user._id}`} >
+          <img src={landingPageIcon} alt="landing page" style={{width: "80%"}} />
+        </Button>
+      <input type="text" placeholder= "search BBCOM" className={classes.searchbar} style={{backgroundColor: "rgb(200,200,200)"}}/>
         {sections.map((section) => (
           <Link
             color="inherit"
@@ -84,6 +68,7 @@ export default function Header(props) {
             variant="body2"
             href={section.url}
             className={classes.toolbarLink}
+            style={{textDecoration:"none"}}
           >
             {section.sec}
           </Link>
@@ -92,16 +77,3 @@ export default function Header(props) {
     </React.Fragment>
   );
 }
-
-// Header.propTypes = {
-//   sections: PropTypes.array,
-//   title: PropTypes.string,
-// };
-
-{/* <IconButton>
-          <SearchIcon />
-        </IconButton> */}
-
-        // setStyle(prevStyle => ({
-        //   ...prevStyle,
-        //   font: { ...prevStyle.font, align: event.target.value }

@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0543273"
-     inkscape:cx="112.64434"
+     inkscape:cx="-13.766183"
      inkscape:cy="101.7945"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -62,15 +62,17 @@
      transform="translate(-39.855724,-148.28404)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:91.13484192px;line-height:1.25;font-family:DokChampa;-inkscape-font-specification:DokChampa;letter-spacing:0px;word-spacing:0px;fill:#0d2c29;fill-opacity:1;stroke:#ffffff;stroke-width:3.79728484;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:91.13484192px;line-height:1.25;font-family:DokChampa;-inkscape-font-specification:DokChampa;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#464646;stroke-width:3.79699998;stroke-opacity:0.97866666;stroke-miterlimit:4;stroke-dasharray:none;opacity:1;"
        x="32.335766"
        y="237.4754"
        id="text949"
-       transform="scale(1.2668671,0.78934879)"><tspan
+       transform="scale(1.2668671,0.78934879)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan947"
          x="32.335766"
          y="237.4754"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DokChampa;-inkscape-font-specification:DokChampa;fill:#0d2c29;fill-opacity:1;stroke:#ffffff;stroke-width:3.79728484;stroke-opacity:1">x</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DokChampa;-inkscape-font-specification:DokChampa;fill:none;fill-opacity:1;stroke:#464646;stroke-width:3.79699998;stroke-opacity:0.97866666;stroke-miterlimit:4;stroke-dasharray:none;">x</tspan></text>
   </g>
 </svg>

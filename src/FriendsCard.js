@@ -8,7 +8,7 @@ const SideCard = (props)=>{
         sideCard: {
             position: 'relative',
             //backgroundImage: `url(${background})`,
-            //backgroundColor: '#aa0000',
+            backgroundColor: 'rgb(255,255,255,0.0)',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
@@ -17,8 +17,9 @@ const SideCard = (props)=>{
           },
           card: {
             display: 'flex',
+            borderRadius: '20px',
             //backgroundImage: `url(${background})`,
-            backgroundColor: 'rgb(13,44,41)',
+            backgroundColor: 'rgb(0,0,0)',
             width: '100%',
             
           },
@@ -28,7 +29,11 @@ const SideCard = (props)=>{
             margin: '10px',
           },
           linkStyles:{
-            color: 'white',
+            color: 'rgb(200,200,200)',
+            '&:hover': {
+                //color: 'rgb(5,153,251,0.7)',
+                textShadow: "0 0 3px rgb(200,200,200), 0 0 5px rgb(200,200,200,0.7)",
+            },
         }
     })
 
