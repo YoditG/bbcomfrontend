@@ -20,7 +20,7 @@ const UserProfile = (props) => {
     useEffect(()=>{
         const getPosts = async ()=>{
             setAuthHeaders()
-            const userData = await axios.get(`http://localhost:3000/users/${user._id}/profile`)
+            const userData = await axios.get(`https://bbcombackend.herokuapp.com/users/${user._id}/profile`)
             console.log(userData)
             setPosts(userData.data.posts)
             setBaller(userData.data.baller)
@@ -55,8 +55,6 @@ const UserProfile = (props) => {
             </Grid>
 
             <Grid container direction="row" spacing={2} justify="center" style={{marginTop: '-3%'}} >
-            
-
                 {screenSize.isDesktopOrLaptop&&<Grid item justify="center" xs={3}>
                     <Grid container direction="column" spacing={2} >
                         <Grid item>
@@ -71,10 +69,10 @@ const UserProfile = (props) => {
                     </Grid>
                 </Grid>}
 
-                <Grid item xs={6} >
-                    <Grid container direction="column" spacing={5} align="center" justify="space-between">
+                <Grid item xs={6}  >
+                    <Grid container  align="space-between" justify="center" spacing={2}>
                         {posts&&  posts.map((post,index) => (
-                            <Grid item xs={12} >
+                            <Grid item style={{ width: "100%"}}>
                                 <FeaturedPost key={index} post={post} index={index} screenSize={screenSize}/>
                             </Grid>
                         ))}
