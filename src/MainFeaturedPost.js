@@ -24,20 +24,20 @@ export default function MainFeaturedPost(props) {
         if(screenSize.isDesktopOrLaptop){
           return 'relative'
         }else if(screenSize.isTabletOrMobile){
-          return 'absolute'
+          return 'relative'//return 'absolute'
         }
       },
       left: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return '0%'
         }else if(screenSize.isTabletOrMobile){
-          return '50%'
+          return '0%'//return '50%'
         }
       },
       transform:()=>{ if(screenSize.isDesktopOrLaptop){
         return 'translate(0%, 0%)'
       }else if(screenSize.isTabletOrMobile){
-        return 'translate(-50%, 0%)'
+        return 'translate(0%, 0%)'//return 'translate(-50%, 0%)'
       }
     },
       display: 'flex',
@@ -46,14 +46,14 @@ export default function MainFeaturedPost(props) {
                 if(screenSize.isDesktopOrLaptop){
                   return '251px'
                 }else if(screenSize.isTabletOrMobile){
-                  return '350px'
+                  return '251px'//return '350px'
                 }
       },
       width: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return '100%'
         }else if(screenSize.isTabletOrMobile){
-          return '200px'
+          return '100%'//return '200px'
         }
       },
       align: "center",
@@ -75,14 +75,14 @@ export default function MainFeaturedPost(props) {
         if(screenSize.isDesktopOrLaptop){
           return '20px'
         }else if(screenSize.isTabletOrMobile){
-          return '140px'
+          return '20px'//return '140px'
         }
       },
       borderBottomLeftRadius: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return '200px'
         }else if(screenSize.isTabletOrMobile){
-          return '20px'
+          return '200px'//return '20px'
         }
       },
       
@@ -108,14 +108,14 @@ export default function MainFeaturedPost(props) {
         if(screenSize.isDesktopOrLaptop){
           return '251px'
         }else if(screenSize.isTabletOrMobile){
-          return '200px'
+          return '251px'//return '200px'
         }
       },
       height: ()=>{
         if(screenSize.isDesktopOrLaptop){
           return '251px'
         }else if(screenSize.isTabletOrMobile){
-          return '200px'
+          return '251px'//return '200px'
         }
       },
 
@@ -162,7 +162,7 @@ export default function MainFeaturedPost(props) {
       {user && 
       <Grid container style={{ width: '100%' }}  direction={screenSize.isTabletOrMobile?"col":"row"} >
         <Grid item className={classes.profilePicGrid}>
-          <img id="profilePic" alt="" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic}/>
+          <img id="profilePic" alt="" src={`https://bbcombackend.herokuapp.com/${user.profilePic}`} className={classes.profilePic}/>
         </Grid>
         <Grid item  xs={7}>
           <div className={classes.mainFeaturedPostContent} paragraph>

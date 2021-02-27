@@ -121,9 +121,9 @@ const Login = ({onLogin, onSetCredentials}) =>{
                     <Grid item >
                         <Grid container direction="row" justify="center" spacing={2}>
                             <Grid item>
-                                <Link to="/user" style={{ textDecoration: "none" }}>
+                                {/* <Link style={{ textDecoration: "none" }}> */}
                                     <Button className={classes.button} onClick={() => onLogin()}>Login</Button>
-                                </Link>
+                                {/* </Link> */}
                             </Grid>
                             <Grid item>
                                 <Link to="/register" style={{ textDecoration: "none" }}>

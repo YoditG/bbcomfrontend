@@ -51,7 +51,7 @@ const login = async (credentials) => {
     const { username, password } = credentials
     let data
     try {
-        data = await axios.post('http://localhost:3000/auth/login', {
+        data = await axios.post('https://bbcombackend.herokuapp.com/auth/login', {
         username,
         password
       })

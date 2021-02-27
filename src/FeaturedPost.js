@@ -25,14 +25,17 @@ const useStyles = makeStyles({
     borderRadius: '20px',
     backgroundColor: 'rgb(0,0,0)',
     color: 'rgb(200,200,200)',
+    
   },
   cardDetails: {
     flex: 1,
     width: '100%',
     color: 'rgb(200,200,200)',
+    
   },
   cardMedia: {
     width: '100%',
+    
   },
   profilePic: {
     borderRadius: '50%',
@@ -55,6 +58,9 @@ const useStyles = makeStyles({
   },
   actionbarButtons: {
     borderTop: 'solid rgb(200,200,200) 1px',
+    borderBottom: 'solid rgb(200,200,200) 1px',
+    height: "3em",
+    marginBottom: "2%"
    
   },
   buttonText:{
@@ -116,7 +122,7 @@ export default function FeaturedPost(props) {
   const handleLikes=(e)=>{
     const config = {
       method: 'put',
-      url: `http://localhost:3000/users/${user._id}/posts/${post._id}/likes`,
+      url: `https://bbcombackend.herokuapp.com/users/${user._id}/posts/${post._id}/likes`,
 
       }
       
@@ -132,7 +138,7 @@ export default function FeaturedPost(props) {
       
       const config = {
         method: 'post',
-        url: `http://localhost:3000/users/${post._id}/addcomment`,
+        url: `https://bbcombackend.herokuapp.com/users/${post._id}/addcomment`,
         data: { 'poster_id':  `${user._id}`,
                 'commentText': `${e.target.value}`,
                 'post_id':  `${post._id}`
@@ -154,7 +160,7 @@ export default function FeaturedPost(props) {
     }
     const config = {
       method: 'delete',
-      url: `http://localhost:3000/users/${post._id}/deletecomment`,
+      url: `https://bbcombackend.herokuapp.com/users/${post._id}/deletecomment`,
       data: { 
         'comment_id':  `${comment_id}`,
         'comment_poster_id': `${poster_id}`,
@@ -178,11 +184,11 @@ export default function FeaturedPost(props) {
       <Card m={-1} className={classes.card}>
         <div className={classes.cardDetails}>
           <CardContent >
-            <Grid direction="column" xs={12} md={12} >
+            <Grid direction="column" xs={12} md={12} spacing={6}>
               <Grid item>
                 <Grid container direction="row" justify="space-between" alignItems="flex-start"  style={{marginLeft: '2%'}} >
                   <Grid item xs={1}   >
-                    <img alt="profilePic" src={`http://localhost:3000/${post.poster_id.profilePic}`} className={classes.profilePic} />
+                    <img alt="profilePic" src={`https://bbcombackend.herokuapp.com/${post.poster_id.profilePic}`} className={classes.profilePic} />
                   </Grid>
                   <Grid item xs={7} >
                     <Grid container direction="column" alignContent="flex-start" justify="flex-start" textJustify="flex-start">
@@ -214,31 +220,31 @@ export default function FeaturedPost(props) {
                 
               </Grid>
               {post.image && <Grid item >
-                <CardMedia className={classes.media} image={`http://localhost:3000/${post.image}`} title={post.imageTitle} />
+                <CardMedia className={classes.media} image={`https://bbcombackend.herokuapp.com/${post.image}`} title={post.imageTitle} />
               </Grid>}
 
               <Grid item style={{ marginLeft: '2%',marginRight: '2%',marginTop: '2%'  }}>
 
-                <Grid container direction="row" justify="space-between" align="center" className={classes.actionbarButtons} >
+                <Grid container direction="row" justify="space-between" className={classes.actionbarButtons} >
 
-                  <Grid item>
-                    <Button onClick={(e) => handleLikes(e)}>
+                  <Grid item style={{ height:"100%"}} >
+                    <Button onClick={(e) => handleLikes(e)} style={{height: "100%"}}>
                       <img src={logo} alt="logo" className={classes.likeButton} /> <p className={classes.buttonText}>  swish {swish[0]}</p>
                     </Button>
                   </Grid>
 
-                  <Grid item>
-                    <Button onClick={() => setCommentBar(!commentBar)}>
+                  <Grid item style={{ height:"100%"}}>
+                    <Button onClick={() => setCommentBar(!commentBar)} style={{ height:"100%"}}>
                       <img src={comment} alt="logo" className={classes.likeButton} /><p className={classes.buttonText}>comments  {comments.length>0&&comments.length}</p>
                     </Button>
                   </Grid>
-                  <Grid item>
-                    <Button >
+                  <Grid item style={{ height:"100%"}}>
+                    <Button style={{ height:"100%"}} >
                       <img src={share} alt="logo" className={classes.likeButton} /><p className={classes.buttonText}>share</p>
                     </Button>
                   </Grid>
-                  <Grid item>
-                    <Button >
+                  <Grid item style={{ height:"100%"}}>
+                    <Button style={{ height:"100%"}}>
                       <p className={classes.buttonText}>3 shares</p>
                     </Button>
                   </Grid>
@@ -248,21 +254,21 @@ export default function FeaturedPost(props) {
               </Grid>
 
               {comments.length > 0 && commentBar &&
-                <Grid item style={{ marginLeft: '2%', marginRight: '2%', marginBottom: '2%' }} >
+                <Grid item style={{ marginLeft: '2%', marginRight: '2%' }} >
                   <Grid container direction="column">
                     {comments.map((comment, ii) => {
                       return (
                         <Grid key={ii} item>
-                          <Grid container direction="row" justify="space-between" style={{ borderTop: '1px solid rgb(200,200,200)', paddingTop: '2%', paddingBottom: '1%' }} alignItems="flex-start" >
+                          <Grid container direction="row" justify="space-between" style={{ borderTop: '1px solid rgb(200,200,200)', paddingTop: '2%',paddingBottom: "2%" }} alignItems="flex-start" >
 
                             <Grid xs={1} item>
-                              <img alt="profilePic" src={`http://localhost:3000/${post.poster_id.profilePic}`} className={classes.profilePic} />
+                              <img alt="profilePic" src={`https://bbcombackend.herokuapp.com/${post.poster_id.profilePic}`} className={classes.profilePic} />
                             </Grid>
 
                             <Grid xs={7} item>
-                              <Grid container direction="column" align="start">
+                              <Grid container direction="column" align="start" >
                                 <Grid item>{comment.user_id.username.toUpperCase()}</Grid>
-                                <Grid item> {comment.text}</Grid>
+                                <Grid item > {comment.text}</Grid>
                               </Grid>
                             </Grid>
 
@@ -285,11 +291,11 @@ export default function FeaturedPost(props) {
                   </Grid>
                 </Grid>}
 
-              <Grid item style={{ marginLeft: '2%',marginRight: '2%', marginTop: '-1%' }}>
+              <Grid item style={{ marginLeft: '2%',marginRight: '2%', marginBottom:"-2%" }}>
                 <Grid container direction="row" justify="space-between" style={{ borderTop: '1px solid rgb(200,200,200)', paddingTop: '2%' }} alignItems="flex-start">
 
                   <Grid item xs={1}>
-                    <img alt="profilePic" src={`http://localhost:3000/${user.profilePic}`} className={classes.profilePic} />
+                    <img alt="profilePic" src={`https://bbcombackend.herokuapp.com/${user.profilePic}`} className={classes.profilePic} />
                   </Grid>
 
                   <Grid xs={10} item>
@@ -323,3 +329,4 @@ export default function FeaturedPost(props) {
 FeaturedPost.propTypes = {
   post: PropTypes.object,
 };
+//classname={classes.buttionsActionbar}

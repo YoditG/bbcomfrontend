@@ -66,9 +66,9 @@ export default function Blog() {
   const handleLogin = async () => {
     const data = await login(credentials)
     console.log(data)
-    setUser(data.data.user)
-    setLoggedIn(true)
-    user&& history.push(`/user/${user._id}`)
+    await setUser(data.data.user)
+    //setLoggedIn(true)
+    data&& history.push(`/user/${data.data.user._id}`)
     
   }
 
@@ -85,7 +85,7 @@ export default function Blog() {
       if(token){
         const userID = window.localStorage.getItem('bbcom-userID')
         setAuthHeaders()
-        const reload = await axios.get(`http://localhost:3000/users/${userID}/userData`)
+        const reload = await axios.get(`https://bbcombackend.herokuapp.com/users/${userID}/userData`)
         console.log('token:',token)
         setUser(reload.data.user)
         return await user
