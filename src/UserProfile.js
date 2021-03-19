@@ -20,7 +20,7 @@ const UserProfile = (props) => {
     useEffect(()=>{
         const getPosts = async ()=>{
             setAuthHeaders()
-            const userData = await axios.get(`https://bbcombackend.herokuapp.com/users/${user._id}/profile`)
+            const userData = await axios.get(`${process.env.REACT_APP_API}/users/${user._id}/profile`)
             console.log(userData)
             setPosts(userData.data.posts)
             setBaller(userData.data.baller)
@@ -55,7 +55,7 @@ const UserProfile = (props) => {
             </Grid>
 
             <Grid container direction="row" spacing={2} justify="center" style={{marginTop: '-3%'}} >
-                {screenSize.isDesktopOrLaptop&&<Grid item justify="center" xs={3}>
+                {/* {screenSize.isDesktopOrLaptop&&<Grid item justify="center" xs={3}>
                     <Grid container direction="column" spacing={2} >
                         <Grid item>
                         <SideCard title="UPCOMING EVENTS"/>
@@ -67,26 +67,26 @@ const UserProfile = (props) => {
                         <Footer title="Footer" description="Privacy  · Impressum/AGB/NetzDG  · Commercial  · Data Protection   · Cookies  ·   · BBcom © 2020" />
                         </Grid>
                     </Grid>
-                </Grid>}
+                </Grid>} */}
 
-                <Grid item xs={6}  >
-                    <Grid container  align="space-between" justify="center" spacing={2}>
+                <Grid item  xs={screenSize.isDesktopOrLaptop?8:12} >
+                    <Grid container  align="space-between" justify="flex-start" spacing={2}>
                         {posts&&  posts.map((post,index) => (
-                            <Grid item style={{ width: "100%"}}>
+                            <Grid item style={{ width: screenSize.isDesktopOrLaptop?"40%":"100%", height: "500px", border: "solid pink 1px"}}>
                                 <FeaturedPost key={index} post={post} index={index} screenSize={screenSize}/>
                             </Grid>
                         ))}
                     </Grid>
                 </Grid>
                 
-                {screenSize.isDesktopOrLaptop&&<Grid item xs={3}>
+                {/* {screenSize.isDesktopOrLaptop&&<Grid item xs={3}>
                     <Grid contaienr direction="column" spacing={2} align="center">
                     <Grid item>
                     <FriendsCard title="MY FRIENDS"/>
                     </Grid>
 
                     </Grid>
-                </Grid>}
+                </Grid>} */}
             </Grid>
             </Grid>
         </>

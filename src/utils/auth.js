@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "development") {
 
 const setAuthHeaders = () => {
   const token = Cookies.get(`${APP_NAME}-auth-token`,{path:'/'});
-  //console.log(token)
+  console.log(token)
   if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
@@ -51,7 +51,7 @@ const login = async (credentials) => {
     const { username, password } = credentials
     let data
     try {
-        data = await axios.post('https://bbcombackend.herokuapp.com/auth/login', {
+        data = await axios.post(`${process.env.REACT_APP_API}/auth/login`, {
         username,
         password
       })

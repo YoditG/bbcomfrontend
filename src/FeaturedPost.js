@@ -10,11 +10,13 @@ import comment from './assets/img/comment_button.svg'
 import share from './assets/img/share_button.svg'
 import axios from 'axios'
 import './App.css'
-import { Button } from '@material-ui/core';
+import { Button,Box } from '@material-ui/core';
+import {FiCard,FiCardMedia,FiCardActions,FiCardContent} from './FullImageCard'
 import logo from './assets/img/theme_wolf/logo_button.png'
 
 import UserContext from './contexts/UserContext'
 import deleteIcon from './assets/img/deleteIcon.png'
+import WebcamStreamCapture from './WebcamStreamCapture'
 
 const useStyles = makeStyles({
   root: {
@@ -23,8 +25,10 @@ const useStyles = makeStyles({
   card: {
    
     borderRadius: '20px',
-    backgroundColor: 'rgb(0,0,0)',
-    color: 'rgb(200,200,200)',
+    backgroundColor: 'rgb(255,255,255)',
+    color: 'rgb(0,0,0)',
+    height: '100%',
+    
     
   },
   cardDetails: {
@@ -44,10 +48,18 @@ const useStyles = makeStyles({
       height: '60px',
       overflow: 'hidden',
   },
-  media: {
-    paddingTop: '56.25%',
-    minWidth: '100%',    
-  },
+  // media: {
+  //   '&:hover':{ opacity: 0.3}
+
+
+  // },
+  // media: {
+  //   //paddingTop: '56.25%',
+  //   // minWidth: '100%',    
+  //   maxWidth: 345,
+  //   height: 500,
+  //   border: "1px green solid"
+  // },
   profilePicGrid: {
     width: '100%',
     height: '60px',
@@ -72,7 +84,8 @@ const useStyles = makeStyles({
     
   },
   postDescription:{
-    minHeight: '300px'
+    minHeight: '300px',
+    maxHeight: '300px'
   },
   postTitle:{
     fontSize: '1.5em'
@@ -95,7 +108,20 @@ const useStyles = makeStyles({
       textDecoration: "none",
       textShadow: "0 0 3px rgb(200,200,200), 0 0 5px rgb(200,200,200,0.7)",
     }
+  },
+
+  boxContainer:{
+    height: "100%",
+    
+  },
+  fiCardContentTextSecondary:{
+    minHeight: '40px'
   }
+  // fiCardContent:{
+  //   paddingBottom: '30px'
+      
+    
+  // }
   
 });
 const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -104,7 +130,7 @@ const options = { year: 'numeric', month: 'short', day: 'numeric' };
 export default function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
-
+  const [opacity, setOpacity] = useState({opacity: '1'})
   const {user,setUser,baller,setBaller,team,setTeam} = useContext(UserContext)
 
   const [comments,setComments]= useState(post.comments);
@@ -116,13 +142,14 @@ export default function FeaturedPost(props) {
   const currentDate = new Date(date)
   return currentDate.toLocaleDateString('EN',options)
   }
-  
-  
+  const [style, setStyle] = useState({display: 'none'});
+  const [style2, setStyle2] = useState({display: 'none'});
+  const gradients = ['rgb(255,255,255,0.3)', 'transparent']
 
   const handleLikes=(e)=>{
     const config = {
       method: 'put',
-      url: `https://bbcombackend.herokuapp.com/users/${user._id}/posts/${post._id}/likes`,
+      url: `${process.env.REACT_APP_API}/users/${user._id}/posts/${post._id}/likes`,
 
       }
       
@@ -138,7 +165,7 @@ export default function FeaturedPost(props) {
       
       const config = {
         method: 'post',
-        url: `https://bbcombackend.herokuapp.com/users/${post._id}/addcomment`,
+        url: `${process.env.REACT_APP_API}/users/${post._id}/addcomment`,
         data: { 'poster_id':  `${user._id}`,
                 'commentText': `${e.target.value}`,
                 'post_id':  `${post._id}`
@@ -160,7 +187,7 @@ export default function FeaturedPost(props) {
     }
     const config = {
       method: 'delete',
-      url: `https://bbcombackend.herokuapp.com/users/${post._id}/deletecomment`,
+      url: `${process.env.REACT_APP_API}/users/${post._id}/deletecomment`,
       data: { 
         'comment_id':  `${comment_id}`,
         'comment_poster_id': `${poster_id}`,
@@ -179,16 +206,80 @@ export default function FeaturedPost(props) {
 
   return (
   
-    
+      // <Card 
+      // className={classes.card}>
+      //     <CardContent style={{position:"center"}} >
+      //         {post.image &&
+      //           <CardMedia className={classes.media} image={`${process.env.REACT_APP_API}/${post.image}`} title={post.imageTitle} />
+      //         }
+      //     </CardContent>
+      // </Card>
 
-      <Card m={-1} className={classes.card}>
-        <div className={classes.cardDetails}>
-          <CardContent >
-            <Grid direction="column" xs={12} md={12} spacing={6}>
-              <Grid item>
-                <Grid container direction="row" justify="space-between" alignItems="flex-start"  style={{marginLeft: '2%'}} >
+      <Box className={classes.boxContainer}
+        onMouseEnter={e => {
+          setStyle({
+            display: 'block',
+            background: 'linear-gradient(0deg, transparent 10%, rgb(255,255,255,0.6) 50% )',
+          });
+          setStyle2({
+            display: 'block',
+            marginTop: '275px',
+            height: '100px',
+            paddingTop: '40px',
+            background: 'linear-gradient(0deg, rgb(255,255,255,0.6) 50%, transparent 100% )'
+            })
+        }}
+        onMouseLeave={e => {
+          setStyle({display: 'none'})
+          setStyle2({display: 'none'})
+        }}
+        
+      >
+        <FiCard className={classes.card}>
+          <FiCardMedia
+            media="picture"
+            alt="Contemplative Reptile"
+            image={`${process.env.REACT_APP_API}/${post.image}`}
+            title="Contemplative Reptile"
+            className={classes.media}
+          />
+          <FiCardContent className={classes.fiCardContent} style={style}>
+            <Typography gutterBottom variant="h5" component="h2">
+            {post.poster_id.username}
+            </Typography>
+            <Typography
+              variant="body2"
+              className={classes.fiCardContentTextSecondary}
+              component="p"
+              display="flex"
+            >
+              {post.text.substr(0, 39)+" ..." } 
+            </Typography>
+          </FiCardContent>
+          <FiCardActions className={classes.fiCardActions} style={style2} justify="center" align="center">
+            <Button size="small" color="inherit" variant="outlined">
+              Share
+            </Button>
+            <Button size="small" color="inherit" variant="outlined">
+              Learn More
+            </Button>
+          </FiCardActions>
+        </FiCard>
+      </Box>
+  );
+}
+
+FeaturedPost.propTypes = {
+  post: PropTypes.object,
+};
+//classname={classes.buttionsActionbar}
+
+{/* <div className={classes.cardDetails}> */}
+{/* <Grid direction="column" xs={12} md={12} spacing={6}> */}
+              {/* <Grid item> */}
+                {/* <Grid container direction="row" justify="space-between" alignItems="flex-start"  style={{marginLeft: '2%'}} >
                   <Grid item xs={1}   >
-                    <img alt="profilePic" src={`https://bbcombackend.herokuapp.com/${post.poster_id.profilePic}`} className={classes.profilePic} />
+                    <img alt="profilePic" src={`${process.env.REACT_APP_API}/${post.poster_id.profilePic}`} className={classes.profilePic} />
                   </Grid>
                   <Grid item xs={7} >
                     <Grid container direction="column" alignContent="flex-start" justify="flex-start" textJustify="flex-start">
@@ -205,25 +296,25 @@ export default function FeaturedPost(props) {
                         </Typography>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={2} >
+                  </Grid> */}
+                  {/* <Grid item xs={2} >
 
-                  </Grid>
+                  </Grid> */}
 
-                </Grid>
-              </Grid>
-              <Grid item container >
+                {/* </Grid> */}
+              {/* </Grid> */}
+              {/* <Grid item container >
                 
                   <Typography style={{textAlign:"flex-start", margin: '2%'}} variant="subtitle1" paragraph >
                     {post.text}
                   </Typography>
                 
-              </Grid>
-              {post.image && <Grid item >
-                <CardMedia className={classes.media} image={`https://bbcombackend.herokuapp.com/${post.image}`} title={post.imageTitle} />
-              </Grid>}
+              </Grid> */}
 
-              <Grid item style={{ marginLeft: '2%',marginRight: '2%',marginTop: '2%'  }}>
+
+
+
+              {/* <Grid item style={{ marginLeft: '2%',marginRight: '2%',marginTop: '2%'  }}>
 
                 <Grid container direction="row" justify="space-between" className={classes.actionbarButtons} >
 
@@ -248,12 +339,12 @@ export default function FeaturedPost(props) {
                       <p className={classes.buttonText}>3 shares</p>
                     </Button>
                   </Grid>
-                </Grid>
+                </Grid> 
 
 
-              </Grid>
+              </Grid>*/}
 
-              {comments.length > 0 && commentBar &&
+              {/* {comments.length > 0 && commentBar &&
                 <Grid item style={{ marginLeft: '2%', marginRight: '2%' }} >
                   <Grid container direction="column">
                     {comments.map((comment, ii) => {
@@ -262,7 +353,7 @@ export default function FeaturedPost(props) {
                           <Grid container direction="row" justify="space-between" style={{ borderTop: '1px solid rgb(200,200,200)', paddingTop: '2%',paddingBottom: "2%" }} alignItems="flex-start" >
 
                             <Grid xs={1} item>
-                              <img alt="profilePic" src={`https://bbcombackend.herokuapp.com/${post.poster_id.profilePic}`} className={classes.profilePic} />
+                              <img alt="profilePic" src={`${process.env.REACT_APP_API}/${post.poster_id.profilePic}`} className={classes.profilePic} />
                             </Grid>
 
                             <Grid xs={7} item>
@@ -289,13 +380,13 @@ export default function FeaturedPost(props) {
                       )
                     })}
                   </Grid>
-                </Grid>}
+                </Grid>} */}
 
-              <Grid item style={{ marginLeft: '2%',marginRight: '2%', marginBottom:"-2%" }}>
+              {/* <Grid item style={{ marginLeft: '2%',marginRight: '2%', marginBottom:"-2%" }}>
                 <Grid container direction="row" justify="space-between" style={{ borderTop: '1px solid rgb(200,200,200)', paddingTop: '2%' }} alignItems="flex-start">
 
                   <Grid item xs={1}>
-                    <img alt="profilePic" src={`https://bbcombackend.herokuapp.com/${user.profilePic}`} className={classes.profilePic} />
+                    <img alt="profilePic" src={`${process.env.REACT_APP_API}/${user.profilePic}`} className={classes.profilePic} />
                   </Grid>
 
                   <Grid xs={10} item>
@@ -312,21 +403,9 @@ export default function FeaturedPost(props) {
 
                 </Grid>
 
-              </Grid>
+              </Grid> */}
 
 
-            </Grid>
-          </CardContent>
+            {/* </Grid> */}
 
-        </div>
-      </Card>
-
-    
-  
-  );
-}
-
-FeaturedPost.propTypes = {
-  post: PropTypes.object,
-};
-//classname={classes.buttionsActionbar}
+            {/* </div> */}

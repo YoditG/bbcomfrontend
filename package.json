@@ -18,7 +18,13 @@
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "react-webcam": "^5.2.3",
+    "web-vitals": "^0.2.4",
+    "classname": "^0.0.0",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.19.4",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-hammerjs": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

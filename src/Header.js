@@ -46,7 +46,7 @@ export default function Header(props) {
   const {user,setUser} = useContext(UserContext)
   console.log(user)
   const sections = [
-    {sec: user.username, url: `/user/${user._id}`  },
+    {sec: user.username, url: `/user/${user._id}/profile`  },
     {sec: 'messenger', url: '#' },
     {sec: 'log out', url: '/' }
   ]
@@ -56,7 +56,7 @@ export default function Header(props) {
       
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
     
-        <Button style={{width: "6%"}} href={`/user/${user._id}`} >
+        <Button style={{width: "6%"}} href={`/user/${user._id}/landing`} >
           <img src={landingPageIcon} alt="landing page" style={{width: "80%"}} />
         </Button>
       <input type="text" placeholder= "search BBCOM" className={classes.searchbar} style={{backgroundColor: "rgb(200,200,200)"}}/>

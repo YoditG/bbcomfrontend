@@ -10,6 +10,8 @@ import axios from 'axios'
 import Login from './Login'
 import HomePage from './HomePage'
 import Cookies from "js-cookie";
+import Cam from './Cam'
+import CamComponent from './CamComponent'
 
 
 import UserProfile from './UserProfile';
@@ -23,6 +25,8 @@ import {
 } from "react-router-dom";
 
 import { useMediaQuery } from 'react-responsive'
+import WebcamStreamCapture from './WebcamStreamCapture'
+
 
 
 const {setAuthHeaders} =  require('./utils/auth')
@@ -68,7 +72,7 @@ export default function Blog() {
     console.log(data)
     await setUser(data.data.user)
     //setLoggedIn(true)
-    data&& history.push(`/user/${data.data.user._id}`)
+    data&& history.push(`/user/${data.data.user._id}/profile`)
     
   }
 
@@ -85,7 +89,7 @@ export default function Blog() {
       if(token){
         const userID = window.localStorage.getItem('bbcom-userID')
         setAuthHeaders()
-        const reload = await axios.get(`https://bbcombackend.herokuapp.com/users/${userID}/userData`)
+        const reload = await axios.get(`${process.env.REACT_APP_API}/users/${userID}/userData`)
         console.log('token:',token)
         setUser(reload.data.user)
         return await user
@@ -107,34 +111,39 @@ export default function Blog() {
         <Container maxWidth="lg"  >
 
           <main >
-
-            <Switch>
-            
-              <Route path="/login" >
+          <Switch>
+          <Route path="/login" >
                 <Login onLogin={handleLogin} onSetCredentials={handleSetCredentials} />
               </Route>
+          </Switch>
+
+          <UserContext.Provider value={{ user, setUser,baller, setBaller, team, setTeam}}>
+            <Switch>
               {user &&
-                <ProtectedRoute path={`/user/${user._id}`} onLogout={handleLogout} >
-                  
-                      <UserContext.Provider value={{ user, setUser,baller, setBaller, team, setTeam}}>
+                <ProtectedRoute path={`/user/${user._id}/captureVideo`} onLogout={handleLogout} >
+                  {/* <WebcamStreamCapture screenSize={screenSize}/> */}
+                  <CamComponent/>
+                </ProtectedRoute>
+              }
+
+              {user &&
+                <ProtectedRoute path={`/user/${user._id}/profile`} onLogout={handleLogout} >
                         <Header />
                         <UserProfile screenSize={screenSize} />
-                      </UserContext.Provider>
-                    
                 </ProtectedRoute>}
 
-                {user&& <ProtectedRoute path='/landing' onLogout={handleLogout} >
-                  
-                      {/* <UserContext.Provider value={{ user, setUser,baller, setBaller, team, setTeam}}>
-                        <Header />
-                        <LandingPage screenSize={screenSize} />
-                      </UserContext.Provider> */}
+                {user&&
+                <ProtectedRoute path={`/user/${user._id}/landing`} onLogout={handleLogout} >
+                  <Header />
+          
                     
                 </ProtectedRoute>}
+                
               <Route path="/" exact>
                 <HomePage />
               </Route>
             </Switch>
+            </UserContext.Provider>
           </main>
         </Container>
 
